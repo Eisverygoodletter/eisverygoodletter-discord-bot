@@ -31,7 +31,6 @@ client.on('message', msg => {
   }
   else{
     var command = msg.content.split(" ")[0]; //first word
-    console.log(command);
     for(var i = 0; i < commandList.length; i++){
       if(command == commandList[i].commandName){
         // check if person has role
@@ -58,7 +57,6 @@ client.on('message', msg => {
           });
         }
         if(canCommand){
-          console.log("yay");
           commandList[i].details.callFunc(msg.content.split(" "),msg);
         }
         break; // no other commands will match
