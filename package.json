@@ -9,7 +9,8 @@
   "author": "YuetLong Feng",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.5.3"
+    "discord.js": "^12.5.3",
+    "express": "^4.17.1"
   },
   "engines": {
     "node": "v12.19.0"

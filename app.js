@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const http = require("http");
 const verifyJS = require("./jsfiles/verify");
+const express = require("express");
+var app = express();
 
 var currentVerifying = []
 
@@ -13,6 +15,9 @@ client.on('message', msg => {
   if(msg.channel.name == process.env.VERIFY_CHANNEL){
     if(msg.content = "!verify"){
       var linkId = verifyJS.verify(msg, client);
+      app.get(linkId, function(req,res){
+        res.sendFile("./jsfiles/verify.html");
+      });
       currentVerifying.push(linkId);
     }
   }
@@ -23,8 +28,6 @@ client.on('message', msg => {
 
 client.login('ODczMTU2OTE3NDA3NjY2MTg2.YQ0Uvw.d4FTiklG5A3J1XN0HtY7uN-v0GA');
 
-http.createServer(function(request, response){
-    //console.log(request,response);
-    console.log(request);
 
-}).listen(process.env.PORT || 5000);
+
+var server = app.listen(process.env.PORT || 5000);

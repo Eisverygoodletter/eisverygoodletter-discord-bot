@@ -2,11 +2,15 @@
 
 const verify = function(msg, myClient){
     console.log("verifying" + msg.author.username);
-    var thisToken = msg.author.Discriminator;
+    var thisToken = msg.author.username + msg.author.id.toString();
     msg.author.send("please go to this link: ");
-    var address = "https://eisverygoodletter-discord-bot.herokuapp.com/verify/" + msg.author.username + thisToken;
+    var address = "https://eisverygoodletter-discord-bot.herokuapp.com/verify/" + thisToken;
     msg.author.send(address);
-    return ["verify/" + msg.author.username + thisToken, msg.author.id];
+    var linkId = {
+        link: "/verify/" + thisToken,
+        identification: thisToken
+    }
+    return linkId
 }
 
 module.exports = {
