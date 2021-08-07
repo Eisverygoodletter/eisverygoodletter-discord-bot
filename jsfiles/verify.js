@@ -1,6 +1,6 @@
 
 
-const verify = async function(msg, myClient){
+const verify = function(msg, myClient){
     console.log("verifying" + msg.author.username);
     var thisToken = msg.author.Discriminator;
     msg.author.send("please go to this link: ");

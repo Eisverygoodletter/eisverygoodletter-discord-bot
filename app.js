@@ -12,7 +12,7 @@ client.on('ready', () => {
 client.on('message', msg => {
   if(msg.channel.name == process.env.VERIFY_CHANNEL){
     if(msg.content = "!verify"){
-      var linkId = await verifyJS.verify(msg, client);
+      var linkId = verifyJS.verify(msg, client);
       currentVerifying.push(linkId);
     }
   }
