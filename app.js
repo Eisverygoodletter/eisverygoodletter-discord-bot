@@ -1,13 +1,19 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const http = require("http");
+const verifyJS = require("./jsfiles/verify");
 client.on('ready', () => {
   console.log(`Logged in...`);
 });
 
 client.on('message', msg => {
-  if(msg.content.startsWith("!")){
-      msg.reply("why tf you wake me up");
+  if(msg.channel.toString() == "!verify"){
+    if(msg.content = "!verify"){
+      verifyJS.verify(msg, client);
+    }
+  }
+  else if(msg.channel.toString() == "bot-commands"){
+    
   }
 });
 
