@@ -8,12 +8,12 @@ client.on('ready', () => {
 
 client.on('message', msg => {
   console.log(msg.content);
-  if(msg.channel.toString() == process.env.VERIFY_CHANNEL){
+  if(msg.channel.name == process.env.VERIFY_CHANNEL){
     if(msg.content = "!verify"){
       verifyJS.verify(msg, client);
     }
   }
-  else if(msg.channel.toString() == process.env.BOT_COMMANDS_CHANNEL){
+  else if(msg.channel.name == process.env.BOT_COMMANDS_CHANNEL){
     
   }
 });
