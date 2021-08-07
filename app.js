@@ -83,3 +83,4 @@ function loadCommands(){
   // require(jsfiles/yourFile.js)();
   require("./jsfiles/polls.js")();
 }
+loadCommands();
