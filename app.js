@@ -21,7 +21,7 @@ client.on('message', msg => {
       });
       app.post(linkId.link, function(req, res){
         console.log("we dun");
-        var verifiedRole = linkId.msg.guild.roles.find(role => role.name === "verified");
+        var verifiedRole = linkId.msg.member.guild.roles.cache.find(role => role.name === "verified");
         linkId.msg.member.roles.add(verifiedRole);
       });
       currentVerifying.push(linkId);
