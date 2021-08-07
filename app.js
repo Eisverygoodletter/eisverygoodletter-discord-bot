@@ -23,7 +23,7 @@ client.on('message', msg => {
         console.log("we dun");
         var verifiedRole = linkId.msg.member.guild.roles.cache.find(role => role.name === "verified");
         linkId.msg.member.roles.add(verifiedRole);
-        client.channels.cache.get("872434161741357140").send(linkId.msg.member.name + " just got verified! welcome!");
+        client.channels.cache.get("872434161741357140").send(linkId.msg.author.username + " just got verified! welcome!");
       });
       currentVerifying.push(linkId);
     }
