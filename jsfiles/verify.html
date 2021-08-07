@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+        function onSubmit(){
+            document.getElementById("demo-form").submit();
+        }
+    </script>
     <head>
         <title>verify</title>
     </head>
     <body>
-        
+        <button class="g-recaptcha" 
+        data-sitekey="6LefJOUbAAAAAFfF27gLr2mAXVqVt3C2FxwCc1Gz" 
+        data-callback='onSubmit' 
+        data-action='submit'>reCaptcha verify</button>
     </body>
 </html>
