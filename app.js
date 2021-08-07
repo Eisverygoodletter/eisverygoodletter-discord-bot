@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const http = require("http");
-const verifyJS = require("./jsfiles/verify.mjs");
+const verifyJS = require("./jsfiles/verify.js");
 const express = require("express");
 var app = express();
 
@@ -79,5 +79,5 @@ var server = app.listen(process.env.PORT || 5000);
 
 function loadCommands(){
   // require(jsfiles/yourFile.js)();
-  require("./jsfiles/polls.mjs")();
+  require("./jsfiles/polls.js")();
 }
