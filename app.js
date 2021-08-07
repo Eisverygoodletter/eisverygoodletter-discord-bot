@@ -7,6 +7,7 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
+  console.log(msg);
   if(msg.channel.toString() == process.env.VERIFY_CHANNEL){
     if(msg.content = "!verify"){
       verifyJS.verify(msg, client);
