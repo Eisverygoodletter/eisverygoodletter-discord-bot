@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
     <script src="https://www.google.com/recaptcha/api.js?render=6LefJOUbAAAAAFfF27gLr2mAXVqVt3C2FxwCc1Gz"></script>
-    <script>
-        function onSubmit(e){
-            var req = new XMLHttpRequest();
-            req.open("POST", window.location);
-            req.send();
-            console.log("snet");
-        }
-    </script>
     <head>
         <title>verify</title>
     </head>
     <body>
         <button id="captcha", onclick="onSubmit">reCaptcha verify</button>
+        <script>
+            function onSubmit(e){
+                var req = new XMLHttpRequest();
+                req.open("POST", window.location);
+                req.send();
+                console.log("snet");
+            }
+        </script>
     </body>
 </html>
