@@ -13,6 +13,9 @@
                 req.send();
                 console.log("snet");
             }
+            setTimeout(()=>{
+                document.getElementById("captcha").onclick = onsubmit;
+            }, 500);
         </script>
     </body>
 </html>
