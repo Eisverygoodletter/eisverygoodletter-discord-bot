@@ -7,12 +7,12 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-  if(msg.channel.toString() == "!verify"){
+  if(msg.channel.toString() == process.env.VERIFY_CHANNEL){
     if(msg.content = "!verify"){
       verifyJS.verify(msg, client);
     }
   }
-  else if(msg.channel.toString() == "bot-commands"){
+  else if(msg.channel.toString() == process.env.BOT_COMMANDS_CHANNEL){
     
   }
 });
