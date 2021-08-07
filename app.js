@@ -37,7 +37,7 @@ client.on('message', msg => {
         // check if person has role
         var hasPerms = [];
         for(var j = 0; j < commandList[i].details.requiredPerms.length; j++){
-          if(msg.member.roles.cache.some(role => role.name === commandList[i].details.requiredPerms[i])){
+          if(msg.member.roles.cache.some(role => role.name === commandList[i].details.requiredPerms[j])){
             hasPerms.push(true);
           }
           else{
