@@ -6,6 +6,7 @@ const express = require("express");
 var app = express();
 
 var currentVerifying = []
+var commandList = []; // in the format of [!command, { comdata }]
 
 client.on('ready', () => {
   console.log(`Logged in...`);
@@ -23,7 +24,7 @@ client.on('message', msg => {
         console.log("we dun");
         var verifiedRole = linkId.msg.member.guild.roles.cache.find(role => role.name === "verified");
         linkId.msg.member.roles.add(verifiedRole);
-        client.channels.cache.get("872434161741357140").send(linkId.msg.author.username + " just got verified! welcome!");
+        client.channels.cache.get(process.env.GENERAL_CHANNEL_KEY).send(linkId.msg.author.username + " just got verified! welcome!");
       });
       currentVerifying.push(linkId);
     }
@@ -38,3 +39,13 @@ client.login('ODczMTU2OTE3NDA3NjY2MTg2.YQ0Uvw.d4FTiklG5A3J1XN0HtY7uN-v0GA');
 
 
 var server = app.listen(process.env.PORT || 5000);
+
+
+/*
+  ADD COMMANDS UNDERNEATH
+
+*/
+
+function loadCommands(){
+  // require(jsfiles/libname/yourFile.js)();
+}
