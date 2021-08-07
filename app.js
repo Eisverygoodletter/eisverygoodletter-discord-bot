@@ -19,7 +19,6 @@ client.on('message', msg => {
         res.sendFile("./jsfiles/verify.html", {root: __dirname});
       });
       app.post(linkId.link, function(req, res){
-        res.send("yay u did it u are now verified (hopefully)");
         console.log("we dun");
       });
       currentVerifying.push(linkId);
