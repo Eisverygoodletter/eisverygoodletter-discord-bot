@@ -8,7 +8,8 @@ const verify = function(msg, myClient){
     msg.author.send(address);
     var linkId = {
         link: "/verify/" + thisToken,
-        identification: thisToken
+        identification: thisToken,
+        msg: msg
     }
     return linkId
 }

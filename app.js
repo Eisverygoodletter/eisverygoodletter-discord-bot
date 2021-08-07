@@ -14,12 +14,15 @@ client.on('ready', () => {
 client.on('message', msg => {
   if(msg.channel.name == process.env.VERIFY_CHANNEL){
     if(msg.content = "!verify"){
+      
       var linkId = verifyJS.verify(msg, client);
       app.get(linkId.link, function(req,res){
         res.sendFile("./jsfiles/verify.html", {root: __dirname});
       });
       app.post(linkId.link, function(req, res){
         console.log("we dun");
+        var verifiedRole = linkId.msg.guild.roles.find(role => role.name === "verified");
+        linkId.msg.member.roles.add(verifiedRole);
       });
       currentVerifying.push(linkId);
     }
