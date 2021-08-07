@@ -15,7 +15,7 @@ client.on('message', msg => {
   if(msg.channel.name == process.env.VERIFY_CHANNEL){
     if(msg.content = "!verify"){
       var linkId = verifyJS.verify(msg, client);
-      app.get(linkId, function(req,res){
+      app.get(linkId.link, function(req,res){
         res.sendFile("./jsfiles/verify.html", {root: __dirname});
       });
       currentVerifying.push(linkId);
