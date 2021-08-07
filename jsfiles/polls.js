@@ -13,5 +13,6 @@ module.exports = function(){
             requireAllPermsListed: true,
         }
     };
-    commandList.push(pollAdd);
+    var allAdds = [pollAdd]
+    return allAdds;
 }

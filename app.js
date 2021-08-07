@@ -80,7 +80,6 @@ var server = app.listen(process.env.PORT || 5000);
 */
 
 function loadCommands(){
-  // require(jsfiles/yourFile.js)();
-  require("./jsfiles/polls.js")();
+  commandList = commandList.concat(require("./jsfiles/polls.js")());
 }
 loadCommands();
