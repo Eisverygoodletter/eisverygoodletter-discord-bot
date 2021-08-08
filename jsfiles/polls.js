@@ -21,8 +21,7 @@ function poll(params, msg, client){
             // add reactions
             console.log(client.emojis);
             for(let i = 1; i < params.length; i++){
-                var emoji = client.emojis.cache.find(emoj => emoj.name === ("regional_indicator_" + String.fromCharCode(i + 96) ) );
-                newMsg.react(emoji);
+                newMsg.react(charList[i - 1]);
             }
         })
     }
