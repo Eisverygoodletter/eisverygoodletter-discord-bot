@@ -57,7 +57,7 @@ client.on('message', msg => {
           });
         }
         if(canCommand){
-          commandList[i].details.callFunc(msg.content.split(" "),msg);
+          commandList[i].details.callFunc(msg.content.split(" "),msg, client);
         }
         break; // no other commands will match
       }
