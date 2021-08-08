@@ -7,6 +7,7 @@ function poll(inputArray, msg, client){
     var messageToSend = ""
     messageToSend += inputArray[1] + "\n";
     messageToSend += "vote!\n";
+    console.log(inputArray);
     var ansText = inputArray.slice(2, inputArray.length).join();
     console.log(ansText);
     var ansArray = ansText.split(",");
@@ -19,7 +20,7 @@ function poll(inputArray, msg, client){
     }
     channel.send(messageToSend).then((msgobj)=>{
         for(let i = 0; i < ansArray.length; i++){
-            var emoji = client.emoji.cache.find(emoji => emoji.name == (":regional_indicator_"+String.fromCharCode(i+97)+":"));
+            var emoji = client.emojis.cache.find(emoji => emoji.name == (":regional_indicator_"+String.fromCharCode(i+97)+":"));
             msgobj.react(emoji);
         }
     });
