@@ -5,7 +5,7 @@ function poll(inputArray, msg, client){
     // index 0 in inputArray is just the command, actual stuff starts from 1
     var channel = msg.channel;
     var messageToSend = ""
-    messageToSend += inputArray[1] + "\n";
+    messageToSend += inputArray.slice(1).join("").split(",")[0] + "\n";
     messageToSend += "vote!\n";
     console.log(inputArray);
     var ansText = inputArray.slice(2, inputArray.length).join("");
