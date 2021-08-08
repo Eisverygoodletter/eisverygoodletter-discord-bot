@@ -57,7 +57,13 @@ client.on('message', msg => {
           });
         }
         if(canCommand){
-          commandList[i].details.callFunc(msg.content.split(" "),msg, client);
+          var params = null;
+          if(commandList[i].details.paramType === "infi-size"){
+            params = msg.content.substr(msg.content.indexOf(" ") + 1);
+            // params now does not have the poll
+            params = params.split(commandList[i].details.splittingUnit);
+          }
+          commandList[i].details.callFunc(params, msg, client);
         }
         break; // no other commands will match
       }

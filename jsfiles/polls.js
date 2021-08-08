@@ -1,29 +1,22 @@
 const charList = "🇦🇧🇨🇩🇪🇫";
 
-function poll(inputArray, msg, client){
-    console.log("wow poll");
-    // index 0 in inputArray is just the command, actual stuff starts from 1
-    var channel = msg.channel;
-    var messageToSend = ""
-    messageToSend += inputArray.slice(1).join("").split(",")[0] + "\n";
-    messageToSend += "vote!\n";
-    console.log(inputArray);
-    var ansText = inputArray.slice(2, inputArray.length).join("");
-    console.log(ansText);
-    var ansArray = ansText.split(",");
-
-    for(let i = 0; i < ansArray.length; i++){
-        // start from 1 bc 0 is the command
-        var indic = ":regional_indicator_" + String.fromCharCode(i + 97) + ":"; // 97 starts with a
-        var addIn = indic + ": " + ansArray[i] + "\n";
-        messageToSend += addIn;
+function poll(params, msg, client){
+    console.log("polling " + params.join());
+    // params 0 is the question
+    var messageText = "";
+    var question = params[0];
+    messageText += question + "\n";
+    messageText += "vote!\n";
+    for(let i = 1; i < params.length; i++){
+        // starting from index 1, create question for each
+        var addIn = ":regional_indicator_" + String.fromCharCode(i + 96) + "::" //97 starts with the actual unicode stuff
+        addIn += params[i];
+        addIn += "\n";
+        messageText += addIn;
     }
-    channel.send(messageToSend).then((msgobj)=>{
-        for(let i = 0; i < ansArray.length; i++){
-            var emoji = client.emojis.cache.find(emoji => emoji.name === ("regional_indicator_"+String.fromCharCode(i+97)));
-            msgobj.react(emoji.id);
-        }
-    });
+    msg.channel.send(messageText).then((newMsg)=>{
+        // add reactions
+    })
 }
 
 
@@ -35,6 +28,8 @@ module.exports = function(){
             callFunc: poll,
             requiredPerms: ["verified"],
             requireAllPermsListed: true,
+            paramType: "infi-size",
+            splittingUnit: ", ",
         }
     };
     var allAdds = [pollAdd]
