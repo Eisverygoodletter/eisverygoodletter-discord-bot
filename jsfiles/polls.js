@@ -8,10 +8,11 @@ function poll(inputArray, msg){
         channel.send("ERROR: Too many parameters");
     }
     var messageToSend = ""
+    messageToSend += inputArray[1] + "\n";
     messageToSend += "vote!\n";
     for(let i = 2; i < inputArray.length; i++){
         // start from 1 bc 0 is the command
-        var indic = ":regional_indicator_a";
+        var indic = ":regional_indicator_" + String.fromCharCode(i + 95); // 97 starts with a
         var addIn = indic + ": " + inputArray[i] + "\n";
         messageToSend += addIn;
     }
