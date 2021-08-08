@@ -9,9 +9,9 @@ function poll(inputArray, msg){
     }
     var messageToSend = ""
     messageToSend += "vote!\n";
-    for(let i = 1; i < inputArray.length; i++){
+    for(let i = 2; i < inputArray.length; i++){
         // start from 1 bc 0 is the command
-        var indic = charList[i - 1];
+        var indic = ":regional_indicator_a";
         var addIn = indic + ": " + inputArray[i] + "\n";
         messageToSend += addIn;
     }
