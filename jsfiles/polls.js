@@ -19,8 +19,9 @@ function poll(params, msg, client){
     if(weSentSomething){
         msg.channel.send(messageText).then((newMsg)=>{
             // add reactions
+            console.log(client.emojis);
             for(let i = 1; i < params.length; i++){
-                var emoji = client.emojis.cache?.find(emoj => emoj.name === ("regional_indicator_" + String.fromCharCode(i + 96) ) );
+                var emoji = client.emojis.cache.find(emoj => emoj.name === ("regional_indicator_" + String.fromCharCode(i + 96) ) );
                 newMsg.react(emoji);
             }
         })
