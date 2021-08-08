@@ -20,7 +20,7 @@ function poll(params, msg, client){
         msg.channel.send(messageText).then((newMsg)=>{
             // add reactions
             for(let i = 1; i < params.length; i++){
-                var emoji = client.emojis.find(emoj => emoj.name === "regional_indicator_" + String.fromCharCode(i + 96));
+                var emoji = client.emojis.cache.find(emoj => emoj.name === "regional_indicator_" + String.fromCharCode(i + 96));
                 newMsg.react(emoji);
             }
         })
