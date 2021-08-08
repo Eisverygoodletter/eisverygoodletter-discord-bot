@@ -21,7 +21,8 @@ function poll(params, msg, client){
             // add reactions
             console.log(client.emojis);
             for(let i = 1; i < params.length; i++){
-                newMsg.react(msg.guild.emojis.cache.find(emoji => emoji.name === "regional_indicator_"+String.fromCharCode(i + 96)));
+                console.log(msg.guild.emojis.cache.find(emoji => emoji.name === "regional_indicator_"+String.fromCharCode(i + 96)))
+                newMsg.react(msg.guild.emojis.cache.find(emoji => emoji.name === "regional_indicator_"+String.fromCharCode(i + 96)).id);
             }
         })
     }
