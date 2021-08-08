@@ -7,15 +7,21 @@ function poll(inputArray, msg){
     var messageToSend = ""
     messageToSend += inputArray[1] + "\n";
     messageToSend += "vote!\n";
-    var ansText = inputArray.slice(2).join();
+    var ansText = inputArray.slice(2, inputArray.length).join();
+    console.log(ansText);
     var ansArray = ansText.split(",");
+
     for(let i = 0; i < ansArray.length; i++){
         // start from 1 bc 0 is the command
-        var indic = ":regional_indicator_" + String.fromCharCode(i + 97); // 97 starts with a
+        var indic = ":regional_indicator_" + String.fromCharCode(i + 97) + ":"; // 97 starts with a
         var addIn = indic + ": " + ansArray[i] + "\n";
         messageToSend += addIn;
     }
-    channel.send(messageToSend);
+    channel.send(messageToSend).then((msgobj)=>{
+        for(let i = 0; i < ansArray.length; i++){
+            msgobj.react(":regional_indicator_" + String.fromCharCode(i + 97) + ":");
+        }
+    });
 }
 
 
