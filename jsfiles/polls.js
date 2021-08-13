@@ -20,7 +20,8 @@ function poll(params, msg, client){
         msg.channel.send(messageText).then((newMsg)=>{
             // add reactions
             for(let i = 1; i < params.length; i++){
-                //console.log(charList[i - 1]);
+                console.log(charList);
+                console.log(charList.charAt(i - 1));
                 newMsg.react(charList.charAt(i-1));
             }
         })
