@@ -1,9 +1,12 @@
 // jquery allowed in here
+const baseURL = "https://eisverygoodletter-discord-bot.herokuapp.com";
+var username = null;
+var ID = null;
 
 $(document).ready(function(){
     // put all code in here
     $("#loginModal").modal("show");
-    $("#login").onclick = function(){
+    $("#login").click(function(){
         if($("#modalUsernameInput").val() == ""){
             alert("error: you need to put in a username");
         }
@@ -11,16 +14,30 @@ $(document).ready(function(){
             alert("error: you need to put in a password");
         }
         else{
-            if($("#modalNewInput").val() == true){
+            // close BOX
+            $("#loginModal").modal("hide");
+            username = $("#modalUsernameInput").val();
+            const password = $("#modalPasswordInput").val(); //hashing will be done on serverside
+            // code put here is exposed to the public and the hashing algorithm / salt will be known
+            var dataBody = new Document();
+            dataBody.textContent = JSON.stringify({userName: username, passWord: password});
+            if($("#modalNewInput").is(":checked")){
                 // create a new account
                 console.log("requesting for creating a new account");
+                var createRequest = new XMLHttpRequest();
+                createRequest.open("GET", baseURL + "/INTERCON/CREATE_ACC");
+                createRequest.send(dataBody);
             }
             else{
                 // login to the old account
                 console.log("requesting for log in...");
+                var loginRequest = new XMLHttpRequest();
+                loginRequest.open("GET", baseURL + "/INTERCON/LOGIN");
+                loginRequest.send(dataBody);
             }
             // clean this function off
             $("#login").onclick = null;
+            //$("#loginModal").modal("hide"); // destruction of the modal
         }
-    }
+    });
 })

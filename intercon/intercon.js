@@ -28,7 +28,7 @@ module.exports = function(app, client){
         res.sendFile("./interconclient.js", {root: __dirname});
     })
     app.get("/INTERCON/LOGIN", function(req, res){
-        
+        console.log(req);
     });
     app.get("/INTERCON/CREATE_ACC", function(req, res){
         
