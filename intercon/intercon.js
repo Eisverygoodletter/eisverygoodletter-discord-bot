@@ -28,8 +28,8 @@ module.exports = function(app, client){
         res.sendFile("./interconclient.js", {root: __dirname});
     })
     app.get("/INTERCON/LOGIN", function(req, res){
-        const password = req.query.password;
-        const username = req.query.username;
+        const password = req.query.passWord;
+        const username = req.query.userName;
         console.log(password, username);
     });
     app.get("/INTERCON/CREATE_ACC", function(req, res){
