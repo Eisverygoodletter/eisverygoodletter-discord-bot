@@ -11,7 +11,8 @@
   "dependencies": {
     "discord.js": "^12.5.3",
     "express": "^4.17.1",
-    "firebase": "^8.9.1"
+    "firebase": "^8.9.1",
+    "firebase-admin": "^9.11.0"
   },
   "engines": {
     "node": "v12.19.0"
