@@ -6,7 +6,7 @@ module.exports = function(app, client){
         credential: admin.credential.cert({
             projectId: process.env.FIRESTORE_PROJECT_ID,
             clientEmail: process.env.FIRESTORE_CLIENT_EMAIL,
-            privateKey: process.env.FIRESTORE_PRIVATE_KEY,
+            privateKey: process.env.FIRESTORE_PRIVATE_KEY.replace('/\\n/g', '\n'),
         }),
         databaseURL: process.env.FIRESTORE_DATABASE_URL,
         projectId: process.env.FIRESTORE_PROJECT_ID
