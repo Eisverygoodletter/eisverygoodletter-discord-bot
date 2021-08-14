@@ -1,12 +1,12 @@
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyCOCMUWVZR-x3jI-e1v8MS5XRk9T9kQTy4",
-    authDomain: "competitive-game.firebaseapp.com",
-    databaseURL: "https://competitive-game-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "competitive-game",
-    storageBucket: "competitive-game.appspot.com",
-    messagingSenderId: "871281418085",
-    appId: "1:871281418085:web:af799a4fdc97c2be7d4b8c",
-    measurementId: "G-MDQTEJQ6PC"
+    apiKey: "AIzaSyBAqW6EthB_kuR0kkd8G5hH0kfFy3yuXDI",
+    authDomain: "eisverygoodletter-discord-bot.firebaseapp.com",
+    projectId: "eisverygoodletter-discord-bot",
+    storageBucket: "eisverygoodletter-discord-bot.appspot.com",
+    messagingSenderId: "969560919680",
+    appId: "1:969560919680:web:ed45b38a2305ffb69ee065",
+    measurementId: "G-J2BNJB4MKF"
 };
 
 module.exports = function(app, client){
