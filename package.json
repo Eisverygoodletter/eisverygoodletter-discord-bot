@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.5.3",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "firebase": "^8.9.1"
   },
   "engines": {
     "node": "v12.19.0"
