@@ -6,9 +6,6 @@ const bcrypt = require("bcrypt");
 // Add the Firebase products that you want to use
 require("firebase/auth");
 require("firebase/firestore");
-console.log("creating salt ...");
-const salt = bcrypt.genSaltSync(parseInt(process.env.HASHING_SALT));
-console.log("salt created!");
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyBAqW6EthB_kuR0kkd8G5hH0kfFy3yuXDI",
@@ -30,7 +27,7 @@ function decryptPassword(encPassword){
 // the hashing salt is hidden in the env vars, because it 
 function hashPassword(password){
     console.log(salt);
-    return bcrypt.hashSync(password, salt);
+    return bcrypt.hashSync(password, parseInt(process.env.HASHING_SALT));
 }
 
 module.exports = function(app, client){
