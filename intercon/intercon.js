@@ -26,8 +26,10 @@ function decryptPassword(encPassword){
 
 // the hashing salt is hidden in the env vars, because it 
 function hashPassword(password){
-    console.log(salt);
-    return bcrypt.hashSync(password, parseInt(process.env.HASHING_SALT));
+    console.log(password);
+    const hashed = bcrypt.hashSync(password, parseInt(process.env.HASHING_SALT));
+    console.log(hashed);
+    return hashed;
 }
 
 module.exports = function(app, client){
