@@ -10,6 +10,7 @@ const firebaseConfig = {
 };
 
 module.exports = function(app, client){
+    var CryptoJS = require("crypto-js");
     var admin = require("firebase-admin");
     admin.initializeApp(); // FIREBASE_CONFIG variable
     // Firebase App (the core Firebase SDK) is always required and
@@ -28,11 +29,15 @@ module.exports = function(app, client){
         res.sendFile("./interconclient.js", {root: __dirname});
     })
     app.get("/INTERCON/LOGIN", function(req, res){
-        const password = req.query.passWord;
+        const encPassword = req.query.passWord;
         const username = req.query.userName;
-        console.log(password, username);
+        // decrypt password
+        const today = new Date().toLocaleDateString();
+        const password = CryptoJS.AES.decrypt(encPassword, today).toString(CryptoJS.enc.Utf8);
+        console.log(encPassword, password);
     });
     app.get("/INTERCON/CREATE_ACC", function(req, res){
-        
+        const encPassword = req.query.passWord;
+        const username = req.query.userName;
     });
 }
