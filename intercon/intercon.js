@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 require("firebase/auth");
 require("firebase/firestore");
 console.log("creating salt ...");
-const salt = bcrypt.genSaltSync(process.env.HASHING_SALT);
+const salt = bcrypt.genSaltSync(process.env.HASHING_SALT.toString());
 console.log("salt created!");
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
