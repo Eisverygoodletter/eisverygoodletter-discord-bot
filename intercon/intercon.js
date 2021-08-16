@@ -26,8 +26,10 @@ function decryptPassword(encPassword){
 
 // the hashing salt is hidden in the env vars, because it 
 async function hashAndContinue(username,password){
-    bcrypt.genSalt((process.env.HASHING_SALT + process.env.HASHING_SALT % password.length), (err, salt)=>{
+    bcrypt.genSalt((parseInt(process.env.HASHING_SALT) + parseInt(process.env.HASHING_SALT) % password.length), (err, salt)=>{
+        console.log(err);
         bcrypt.hash(password, salt, (err, hash)=>{
+            console.log(err);
             console.log(hash);
             console.log(salt);
         });
