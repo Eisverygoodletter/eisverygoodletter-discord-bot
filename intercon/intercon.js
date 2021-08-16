@@ -28,6 +28,7 @@ function decryptPassword(encPassword){
 async function hashAndContinue(username,password){
     bcrypt.genSalt((parseInt(process.env.HASHING_SALT) + parseInt(process.env.HASHING_SALT) % password.length), (err, salt)=>{
         console.log(err);
+        console.log(salt);
         bcrypt.hash(password, salt, (err, hash)=>{
             console.log(err);
             console.log(hash);
