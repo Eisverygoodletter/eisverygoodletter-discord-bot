@@ -25,12 +25,13 @@ function decryptPassword(encPassword){
 }
 
 // the hashing salt is hidden in the env vars, because it 
-function hashPassword(password){
-    console.log(password);
-    console.log(parseInt(process.env.HASHING_SALT));
-    const hashed = bcrypt.hashSync(password, parseInt(process.env.HASHING_SALT));
-    console.log(hashed);
-    return hashed;
+async function hashAndContinue(username,password){
+    bcrypt.genSalt((process.env.HASHING_SALT + process.env.HASHING_SALT % password.length), (err, salt)=>{
+        bcrypt.hash(password, salt, (err, hash)=>{
+            console.log(hash);
+            console.log(salt);
+        });
+    });
 }
 
 module.exports = function(app, client){
@@ -51,9 +52,8 @@ module.exports = function(app, client){
         const username = req.query.userName;
         // decrypt password
         const password = decryptPassword(encPassword);
-        // hash password
-        console.log(hashPassword(password));
-        
+        // hash and continue in an async function
+        hashAndContinue(username, password);
     });
     app.get("/INTERCON/CREATE_ACC", function(req, res){
         const encPassword = req.query.passWord;
