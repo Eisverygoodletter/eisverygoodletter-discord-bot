@@ -62,15 +62,19 @@ module.exports = function(app, client){
         res.sendFile("./interconclient.js", {root: __dirname});
     })
     app.post("/INTERCON/LOGIN", function(req, res){
-        const encPassword = req.query.passWord;
-        const username = req.query.userName;
+        const encPassword = req.body.passWord;
+        const username = req.body.userName;
+        console.log(username);
+        console.log(encPassword);
         // decrypt password
         const password = decryptPassword(encPassword);
         
     });
     app.post("/INTERCON/CREATE_ACC", function(req, res){
-        const encPassword = req.query.passWord;
-        const username = req.query.userName;
+        const encPassword = req.body.passWord;
+        const username = req.body.userName;
+        console.log(username);
+        console.log(encPassword);
         // decrypt password
         const password = decryptPassword(encPassword);
         // hash and continue in async
