@@ -3,6 +3,31 @@ const baseURL = "https://eisverygoodletter-discord-bot.herokuapp.com";
 var username = null;
 var ID = null;
 
+function createAccount(username, encPassword){
+    // create a new account
+    console.log("requesting for creating a new account");
+    $.post({
+        traditional: true,
+        url: baseURL + "/INTERCON/CREATE_ACC",
+        contentType: "application/json",
+        data:JSON.stringify({userName: username, passWord: encPassword}),
+        dataType: "json",
+        success: (response)=>{
+            if(response.succeeded === true){
+                const token = response.token; // note that token MUST NOT BE IN PUBLIC SCOPE AND MUST NOT BE SHOWN
+                // token will act as a password for the current section. It is to be protected by the https protocol
+                return token;
+            }
+            else{
+                alert("failed to login. Error " + response.returnCode.toString() + ", reason: " + response.returnText);
+                alert("this page will now be reloaded.");
+                location.reload();
+                return false;
+            }
+        }
+    });
+}
+
 $(document).ready(function(){
     // put all code in here
     $("#loginModal").modal("show");
@@ -23,25 +48,7 @@ $(document).ready(function(){
             let today = new Date().toLocaleDateString();
             const encPassword = CryptoJS.AES.encrypt(password, today).toString(); // encryption using today's date
             if($("#modalNewInput").is(":checked")){
-                // create a new account
-                console.log("requesting for creating a new account");
-                //var createRequest = new XMLHttpRequest();
-                //createRequest.open("POST", baseURL + "/INTERCON/CREATE_ACC?userName=" + username + "&passWord=" + encPassword);
-                $.post({
-                    traditional: true,
-                    url: baseURL + "/INTERCON/CREATE_ACC",
-                    contentType: "application/json",
-                    data:JSON.stringify({userName: username, passWord: password}),
-                    dataType: "json",
-                    success: (response)=>{
-                        console.log(response);
-                    }
-                });
-                //$.post(baseURL + "/INTERCON/CREATE_ACC", {userName: username, passWord: password}, function(data){
-                //    console.log(data);
-                //})
-
-                //createRequest.send();
+                const token = createAccount(username, encPassword);
             }
             else{
                 // login to the old account
