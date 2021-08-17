@@ -40,7 +40,7 @@ async function hashAndContinueCreate(username,password, res){
                 else{
                     // username doesn't exist, we can try to create one
                     const inputData = {
-                        creationDate: admin.firestore.Timestamp.fromDate(new Date()),
+                        creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
                         password: hash.toString(),
                         username: username
                     };
