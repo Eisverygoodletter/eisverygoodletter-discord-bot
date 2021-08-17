@@ -26,7 +26,7 @@ $(document).ready(function(){
                 // create a new account
                 console.log("requesting for creating a new account");
                 var createRequest = new XMLHttpRequest();
-                createRequest.open("GET", baseURL + "/INTERCON/CREATE_ACC?userName=" + username + "&passWord=" + encPassword);
+                createRequest.open("POST", baseURL + "/INTERCON/CREATE_ACC?userName=" + username + "&passWord=" + encPassword);
 
                 createRequest.send();
             }
@@ -34,7 +34,7 @@ $(document).ready(function(){
                 // login to the old account
                 console.log("requesting for log in...");
                 var loginRequest = new XMLHttpRequest();
-                loginRequest.open("GET", baseURL + "/INTERCON/LOGIN?userName=" + username + "&passWord=" + encPassword);
+                loginRequest.open("POST", baseURL + "/INTERCON/LOGIN?userName=" + username + "&passWord=" + encPassword);
                 loginRequest.send();
             }
             // clean this function off

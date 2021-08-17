@@ -1,5 +1,5 @@
 const CryptoJS = require("crypto-js");
-const admin = require("firebase-admin");
+//const admin = require("firebase-admin");
 const bcrypt = require("bcrypt");
 const firebase = require("firebase");
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -63,14 +63,14 @@ module.exports = function(app, client){
     app.get("/interconclient.js", function(req, res){
         res.sendFile("./interconclient.js", {root: __dirname});
     })
-    app.get("/INTERCON/LOGIN", function(req, res){
+    app.post("/INTERCON/LOGIN", function(req, res){
         const encPassword = req.query.passWord;
         const username = req.query.userName;
         // decrypt password
         const password = decryptPassword(encPassword);
         
     });
-    app.get("/INTERCON/CREATE_ACC", function(req, res){
+    app.post("/INTERCON/CREATE_ACC", function(req, res){
         const encPassword = req.query.passWord;
         const username = req.query.userName;
         // decrypt password
