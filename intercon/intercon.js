@@ -30,11 +30,11 @@ function decryptPassword(encPassword){
 
 // the hashing salt is hidden in the env vars, because it 
 async function hashAndContinueCreate(username,password, res){
-    bcrypt.genSalt(parseInt(password), (err, salt)=>{
-        bcrypt.hash(password, salt, (err, hash)=>{
+    bcrypt.genSalt(parseInt(password), async (err, salt)=>{
+        bcrypt.hash(password, salt, async (err, hash)=>{
             // check if the username exists in firestore
             const userRef = db.collection("users").doc(username);
-            userRef.get().then((docSnapShot)=>{
+            userRef.get().then(async (docSnapShot)=>{
                 // username exists, return that it failed
                 if(docSnapShot.exists){
                     res.send(false);
