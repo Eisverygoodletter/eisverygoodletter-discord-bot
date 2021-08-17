@@ -2,6 +2,10 @@ const CryptoJS = require("crypto-js");
 const admin = require("firebase-admin");
 const firebase = require("firebase/app");
 const bcrypt = require("bcrypt");
+admin.initializeApp(); // FIREBASE_CONFIG variable
+// Firebase App (the core Firebase SDK) is always required and
+// must be listed before other Firebase SDKs
+const db = admin.firestore();
 
 // Add the Firebase products that you want to use
 require("firebase/auth");
@@ -25,22 +29,33 @@ function decryptPassword(encPassword){
 }
 
 // the hashing salt is hidden in the env vars, because it 
-async function hashAndContinue(username,password){
+async function hashAndContinueCreate(username,password, res){
     bcrypt.genSalt(parseInt(password), (err, salt)=>{
-        console.log(err);
-        console.log(salt);
         bcrypt.hash(password, salt, (err, hash)=>{
-            console.log(err);
-            console.log(hash);
-            console.log(salt);
+            // check if the username exists in firestore
+            const userRef = db.collection("users").doc(username);
+            userRef.get().then((docSnapShot)=>{
+                // username exists, return that it failed
+                if(docSnapShot.exists){
+                    res.send(false);
+                }
+                else{
+                    // username doesn't exist, we can try to create one
+                    const inputData = {
+                        creationDate: admin.firestore.Timestamp.fromDate(new Date()),
+                        password: hash.toString(),
+                        username: username
+                    };
+                    // create the new one
+                    const result = await db.collection("users").doc(username).set(inputData);
+                    res.send(true);
+                }
+            });
         });
     });
 }
 
 module.exports = function(app, client){
-    admin.initializeApp(); // FIREBASE_CONFIG variable
-    // Firebase App (the core Firebase SDK) is always required and
-    // must be listed before other Firebase SDKs
 
     firebase.initializeApp(firebaseConfig);
     // first, define the webpage send
@@ -55,13 +70,14 @@ module.exports = function(app, client){
         const username = req.query.userName;
         // decrypt password
         const password = decryptPassword(encPassword);
-        // hash and continue in an async function
-        hashAndContinue(username, password);
+        
     });
     app.get("/INTERCON/CREATE_ACC", function(req, res){
         const encPassword = req.query.passWord;
         const username = req.query.userName;
         // decrypt password
         const password = decryptPassword(encPassword);
+        // hash and continue in async
+        hashAndContinueCreate(username,password, res);
     });
 }
