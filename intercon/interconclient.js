@@ -25,13 +25,23 @@ $(document).ready(function(){
             if($("#modalNewInput").is(":checked")){
                 // create a new account
                 console.log("requesting for creating a new account");
-                var createRequest = new XMLHttpRequest();
-                createRequest.open("POST", baseURL + "/INTERCON/CREATE_ACC?userName=" + username + "&passWord=" + encPassword);
-                $.post(baseURL + "/INTERCON/CREATE_ACC", {userName: username, passWord: password}, function(data){
-                    console.log(data);
-                })
+                //var createRequest = new XMLHttpRequest();
+                //createRequest.open("POST", baseURL + "/INTERCON/CREATE_ACC?userName=" + username + "&passWord=" + encPassword);
+                $.post({
+                    traditional: true,
+                    url: baseURL + "/INTERCON/CREATE_ACC",
+                    contentType: "application/json",
+                    data:JSON.stringify({userName: username, passWord: password}),
+                    dataType: "json",
+                    success: (response)=>{
+                        console.log(response);
+                    }
+                });
+                //$.post(baseURL + "/INTERCON/CREATE_ACC", {userName: username, passWord: password}, function(data){
+                //    console.log(data);
+                //})
 
-                createRequest.send();
+                //createRequest.send();
             }
             else{
                 // login to the old account
