@@ -4,13 +4,13 @@ const bcrypt = require("bcrypt");
 const firebase = require("firebase");
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyBAqW6EthB_kuR0kkd8G5hH0kfFy3yuXDI",
-    authDomain: "eisverygoodletter-discord-bot.firebaseapp.com",
-    projectId: "eisverygoodletter-discord-bot",
-    storageBucket: "eisverygoodletter-discord-bot.appspot.com",
-    messagingSenderId: "969560919680",
-    appId: "1:969560919680:web:ed45b38a2305ffb69ee065",
-    measurementId: "G-J2BNJB4MKF"
+    apiKey: process.env.APIKEY,
+    authDomain: process.env.AUTHDOMAIN,
+    projectId: process.env.PROJECTID,
+    storageBucket: process.env.STORAGEBUCKET,
+    messagingSenderId: process.env.MESSAGINGSENDERID,
+    appId: process.env.APPID,
+    measurementId: process.env.MEASUREMENTID
 };
 firebase.initializeApp(firebaseConfig); // FIREBASE_CONFIG variable
 // Firebase App (the core Firebase SDK) is always required and
