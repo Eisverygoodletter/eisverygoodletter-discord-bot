@@ -54,8 +54,6 @@ async function hashAndContinueCreate(username,password, res){
 }
 
 module.exports = function(app, client){
-
-    firebase.initializeApp(firebaseConfig);
     // first, define the webpage send
     app.get("/intercon", function(req,res){
         res.sendFile("./intercon.html", {root: __dirname});
