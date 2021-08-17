@@ -27,6 +27,9 @@ $(document).ready(function(){
                 console.log("requesting for creating a new account");
                 var createRequest = new XMLHttpRequest();
                 createRequest.open("POST", baseURL + "/INTERCON/CREATE_ACC?userName=" + username + "&passWord=" + encPassword);
+                $.post(baseURL + "/INTERCON/CREATE_ACC", {userName: username, passWord: password}, function(data){
+                    console.log(data);
+                })
 
                 createRequest.send();
             }
