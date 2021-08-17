@@ -2,14 +2,6 @@ const CryptoJS = require("crypto-js");
 const admin = require("firebase-admin");
 const firebase = require("firebase/app");
 const bcrypt = require("bcrypt");
-admin.initializeApp(); // FIREBASE_CONFIG variable
-// Firebase App (the core Firebase SDK) is always required and
-// must be listed before other Firebase SDKs
-const db = admin.firestore();
-
-// Add the Firebase products that you want to use
-require("firebase/auth");
-require("firebase/firestore");
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyBAqW6EthB_kuR0kkd8G5hH0kfFy3yuXDI",
@@ -20,6 +12,15 @@ const firebaseConfig = {
     appId: "1:969560919680:web:ed45b38a2305ffb69ee065",
     measurementId: "G-J2BNJB4MKF"
 };
+admin.initializeApp(firebaseConfig); // FIREBASE_CONFIG variable
+// Firebase App (the core Firebase SDK) is always required and
+// must be listed before other Firebase SDKs
+const db = admin.firestore();
+
+// Add the Firebase products that you want to use
+require("firebase/auth");
+require("firebase/firestore");
+
 
 // decryption algorithm is shown here cuz there's no reason to hide it. It exists on the client side
 function decryptPassword(encPassword){
