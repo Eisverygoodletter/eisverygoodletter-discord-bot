@@ -34,8 +34,12 @@ async function hashAndContinueCreate(username,password, res){
             const userRef = db.collection("users").doc(username);
             userRef.get().then(async (docSnapShot)=>{
                 // username exists, return that it failed
+                var retContent = {};
                 if(docSnapShot.exists){
-                    res.send(false);
+                    retContent.succeeded = false;
+                    retContent.returnCode = 403; // forbidden.
+                    retContent.returnText = "username already exists";
+                    retContent.token = null;
                 }
                 else{
                     // username doesn't exist, we can try to create one
@@ -46,8 +50,13 @@ async function hashAndContinueCreate(username,password, res){
                     };
                     // create the new one
                     const result = await db.collection("users").doc(username).set(inputData);
-                    res.send(true);
+                    console.log(result);
+                    retContent.succeeded = true;
+                    retContent.returnCode = 200;
+                    retContent.returnText = "succeeded";
+                    retContent.token = "lol get trolled";
                 }
+                res.send(retContent);
             });
         });
     });

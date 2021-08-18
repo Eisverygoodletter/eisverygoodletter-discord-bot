@@ -20,7 +20,7 @@ function createAccount(username, encPassword){
             }
             else{
                 alert("failed to login. Error " + response.returnCode.toString() + ", reason: " + response.returnText);
-                alert("this page will now be reloaded.");
+                //alert("this page will now be reloaded.");
                 location.reload();
                 return false;
             }
@@ -49,6 +49,7 @@ $(document).ready(function(){
             const encPassword = CryptoJS.AES.encrypt(password, today).toString(); // encryption using today's date
             if($("#modalNewInput").is(":checked")){
                 const token = createAccount(username, encPassword);
+                console.log(token);
             }
             else{
                 // login to the old account
