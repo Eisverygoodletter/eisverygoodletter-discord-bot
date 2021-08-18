@@ -13,6 +13,7 @@ function createAccount(username, encPassword){
         data:JSON.stringify({userName: username, passWord: encPassword}),
         dataType: "json",
         success: (response)=>{
+            console.log(response);
             if(response.succeeded === true){
                 const token = response.token; // note that token MUST NOT BE IN PUBLIC SCOPE AND MUST NOT BE SHOWN
                 // token will act as a password for the current section. It is to be protected by the https protocol
