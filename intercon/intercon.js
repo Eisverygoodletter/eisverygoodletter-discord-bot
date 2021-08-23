@@ -2,6 +2,7 @@ const CryptoJS = require("crypto-js");
 //const admin = require("firebase-admin");
 const bcrypt = require("bcrypt");
 const firebase = require("firebase");
+const crypt = require("crypto");
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: process.env.APIKEY,
@@ -24,6 +25,11 @@ function decryptPassword(encPassword){
     const today = new Date().toLocaleDateString();
     const password = CryptoJS.AES.decrypt(encPassword, today).toString(CryptoJS.enc.Utf8);
     return password;
+}
+
+async function produceToken(){
+    var token = crypt.randomBytes(69).toString("hex"); // lol 69 funny number
+    return token;
 }
 
 // the hashing salt is hidden in the env vars, because it 
@@ -54,7 +60,7 @@ async function hashAndContinueCreate(username,password, res){
                     retContent.succeeded = true;
                     retContent.returnCode = 200;
                     retContent.returnText = "succeeded";
-                    retContent.token = "lol get trolled";
+                    retContent.token = await produceToken();
                     res.cookie("tokenCookie", retContent.token, {
                         secure: true,
                         httpOnly: true,
@@ -64,6 +70,43 @@ async function hashAndContinueCreate(username,password, res){
                 res.send(retContent);
             });
         });
+    });
+}
+
+async function hashAndContinueLogin(username, password, res){
+    const userRef = db.collection("users").doc(username);
+    userRef.get().then(async (docSnapShot)=> {
+        var retContent = {};
+        if(docSnapShot.exists){
+            var data = doc.data();
+            var testHash = data.password;
+            const success = await bcrypt.compare(password, testHash);
+            if(!success){
+                retContent.succeeded = false;
+                retContent.returnCode = 403;
+                retContent.returnText = "password or username was wrong";
+                retContent.token = "null";
+            }
+            else{
+                // succeeded. Allow login
+                retContent.succeeded = true;
+                retContent.returnCode = 200;
+                retContent.returnText = "succeeded";
+                retContent.token = await produceToken();
+                res.cookie("tokenCookie", retContent.token, {
+                    secure: true,
+                    httpOnly: true,
+                    expires: new Date(new Date().getTime + 60 * 60000),
+                })
+            }
+        }
+        else{
+            retContent.succeeded = false;
+            retContent.returnCode = 403;
+            retContent.returnText = "user did not exist";
+            retContent.token = null;
+        }
+        res.send(retContent);
     });
 }
 
@@ -82,7 +125,7 @@ module.exports = function(app, client){
         console.log(encPassword);
         // decrypt password
         const password = decryptPassword(encPassword);
-        
+        hashAndContinueLogin(username, password, res);
     });
     app.post("/INTERCON/CREATE_ACC", function(req, res){
         const encPassword = req.body.passWord;

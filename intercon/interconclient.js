@@ -20,13 +20,34 @@ function createAccount(username, encPassword){
                 return token;
             }
             else{
-                alert("failed to login. Error " + response.returnCode.toString() + ", reason: " + response.returnText);
+                alert("failed to create account. Error " + response.returnCode.toString() + ", reason: " + response.returnText);
                 //alert("this page will now be reloaded.");
                 location.reload();
                 return false;
             }
         }
     });
+}
+
+function loginAccount(username, encPassword){
+    $.post({
+        traditional: true,
+        url: baseURL + "/INTERCON/LOGIN",
+        contentType: "application/json",
+        data: JSON.stringify({userName: username, passWord: encPassword}),
+        dataType: "json",
+        success: (response)=>{
+            console.log(response);
+            if(response.succeeded == true){
+                const token = response.token;
+                return token;
+            }
+            else{
+                alert("failed to login to account. Error " + response.returnCode.toString() + ", reason: " + response.returnText);
+                location.reload();
+            }
+        }
+    })
 }
 
 $(document).ready(function(){
@@ -50,14 +71,12 @@ $(document).ready(function(){
             const encPassword = CryptoJS.AES.encrypt(password, today).toString(); // encryption using today's date
             if($("#modalNewInput").is(":checked")){
                 const token = createAccount(username, encPassword);
-                console.log(token);
+                //console.log(token);
             }
             else{
                 // login to the old account
                 console.log("requesting for log in...");
-                var loginRequest = new XMLHttpRequest();
-                loginRequest.open("POST", baseURL + "/INTERCON/LOGIN?userName=" + username + "&passWord=" + encPassword);
-                loginRequest.send();
+                const token = loginAccount(username, encPassword);
             }
             // clean this function off
             $("#login").onclick = null;
