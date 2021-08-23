@@ -78,7 +78,7 @@ async function hashAndContinueLogin(username, password, res){
     userRef.get().then(async (docSnapShot)=> {
         var retContent = {};
         if(docSnapShot.exists){
-            var data = doc.data();
+            var data = docSnapShot.data();
             var testHash = data.password;
             const success = await bcrypt.compare(password, testHash);
             if(!success){
