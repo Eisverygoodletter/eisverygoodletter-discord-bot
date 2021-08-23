@@ -55,6 +55,11 @@ async function hashAndContinueCreate(username,password, res){
                     retContent.returnCode = 200;
                     retContent.returnText = "succeeded";
                     retContent.token = "lol get trolled";
+                    res.cookie("tokenCookie", retContent.token, {
+                        secure: true,
+                        httpOnly: true,
+                        expires: new Date(new Date().getTime + 60 * 60000),
+                    })
                 }
                 res.send(retContent);
             });

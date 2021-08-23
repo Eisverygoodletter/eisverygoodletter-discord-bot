@@ -4,7 +4,8 @@ const http = require("http");
 const verifyJS = require("./jsfiles/verify.js");
 const express = require("express");
 var app = express();
-const bodyParser = require("body-parser")
+const cors = require("cors");
+app.use(cors());
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
