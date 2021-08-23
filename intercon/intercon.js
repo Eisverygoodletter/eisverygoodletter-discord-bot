@@ -20,6 +20,7 @@ const db = firebase.firestore();
 
 
 
+
 // decryption algorithm is shown here cuz there's no reason to hide it. It exists on the client side
 function decryptPassword(encPassword){
     const today = new Date().toLocaleDateString();
@@ -27,7 +28,7 @@ function decryptPassword(encPassword){
     return password;
 }
 
-async function produceToken(){
+async function produceToken(username){
     var token = crypt.randomBytes(69).toString("hex"); // lol 69 funny number
     return token;
 }
@@ -60,7 +61,7 @@ async function hashAndContinueCreate(username,password, res){
                     retContent.succeeded = true;
                     retContent.returnCode = 200;
                     retContent.returnText = "succeeded";
-                    retContent.token = await produceToken();
+                    retContent.token = await produceToken(username);
                     res.cookie("tokenCookie", retContent.token, {
                         secure: true,
                         httpOnly: true,
@@ -92,7 +93,7 @@ async function hashAndContinueLogin(username, password, res){
                 retContent.succeeded = true;
                 retContent.returnCode = 200;
                 retContent.returnText = "succeeded";
-                retContent.token = await produceToken();
+                retContent.token = await produceToken(username);
                 res.cookie("tokenCookie", retContent.token, {
                     secure: true,
                     httpOnly: true,
