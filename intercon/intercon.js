@@ -43,6 +43,7 @@ class tokenData{
         this.pinged = false;
         // start a setTimeout function to check if it should still exist after 1 minute
         this.intervalNum = setInterval(this.checkExist, 1000 * 10);
+        console.log(this.intervalNum);
     }
 }
 
