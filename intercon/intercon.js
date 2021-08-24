@@ -29,7 +29,7 @@ class tokenData{
             clearInterval(this.intervalNum);
             global.tokenList.splice(global.tokenList.indexOf(this), 1);
             console.log("destroying token data: ");
-            console.log(this);
+            console.log(global.tokenList);
         }
         else{
             this.pinged = false;
