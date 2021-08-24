@@ -3,6 +3,7 @@ const CryptoJS = require("crypto-js");
 const bcrypt = require("bcrypt");
 const firebase = require("firebase");
 const crypt = require("crypto");
+const { sensitiveHeaders } = require("http2");
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: process.env.APIKEY,
@@ -18,6 +19,32 @@ firebase.initializeApp(firebaseConfig); // FIREBASE_CONFIG variable
 // must be listed before other Firebase SDKs
 const db = firebase.firestore();
 
+
+// tokening
+global.tokenIdCounter = 0;
+class tokenData{
+    checkExist(){
+        if(this.pinged == false){
+            // destroy itself
+            clearInterval(this.intervalNum);
+            global.tokenList.splice(global.tokenList.indexOf(this), 1);
+        }
+        else{
+            this.pinged = false;
+        }
+    }
+    constructor(token, username){
+        this.token = token;
+        this.username = username;
+        this.id = global.tokenIdCounter;
+        global.tokenIdCounter += 1;
+        this.pinged = false;
+        // start a setTimeout function to check if it should still exist after 1 minute
+        this.intervalNum = setInterval(this.checkExist, 1000 * 60);
+    }
+}
+
+global.tokenList = [];
 
 
 
@@ -67,6 +94,8 @@ async function hashAndContinueCreate(username,password, res){
                         httpOnly: true,
                         expires: new Date(new Date().getTime + 60 * 60000),
                     })
+                    var storeToken = new tokenData(retContent.token, username);
+                    global.tokenList.push(storeToken);
                 }
                 res.send(retContent);
             });
@@ -99,6 +128,8 @@ async function hashAndContinueLogin(username, password, res){
                     httpOnly: true,
                     expires: new Date(new Date().getTime + 60 * 60000),
                 })
+                var storeToken = new tokenData(retContent.token, username);
+                global.tokenList.push(storeToken);
             }
         }
         else{
@@ -138,4 +169,5 @@ module.exports = function(app, client){
         // hash and continue in async
         hashAndContinueCreate(username,password, res);
     });
+    require("./intercon-sends.js")(app, client);
 }
