@@ -30,7 +30,7 @@ class tokenData{
             global.tokenList.splice(global.tokenList.indexOf(this), 1);
             console.log("destroying token data: " + this.id.toString());
             // store data in tokenData object
-            db.collection("users").document(this.username).set(this.config);
+            db.collection("users").doc(this.username).set(this.config);
         }
         else{
             this.pinged = false;
