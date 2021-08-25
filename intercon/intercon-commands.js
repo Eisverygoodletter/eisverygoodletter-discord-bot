@@ -23,7 +23,7 @@ function allow(params, msg, client){
                     data.allowedList.push(addObj);
                     console.log(data);
                     // write the data
-                    global.db.collection("users").document(username).set(data);
+                    global.db.collection("users").doc(username).set(data);
                     msg.reply("done");
                 }
             }
