@@ -18,7 +18,7 @@ module.exports = function (app, client){
         else{
             returnInfo = {
                 succeeded: false,
-                returncode: 418,
+                returncode: 408,
                 returnText: "token doesnt exist. Session timeout",
             };
         }

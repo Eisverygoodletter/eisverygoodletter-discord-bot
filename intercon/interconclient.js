@@ -85,7 +85,7 @@ $(document).ready(function(){
             //$("#loginModal").modal("hide"); // destruction of the modal
             
             // activate ping interval
-            globalPingIntervalId = setInterval(pingServer, 3000);
+            globalPingIntervalId = setInterval(pingServer, 15000);
         }
     });
 })
