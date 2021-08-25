@@ -36,13 +36,17 @@ class tokenData{
             this.pinged = false;
         }
     }
+    addChannel(obj){
+        this.config.allowedList.push(obj);
+        console.log(this.username + " is now allowed to go to " + obj.serverId.toString() + ", " + obj.channelId.toString());
+    }
     get allowedList(){
-        return this.data.allowedList;
+        return this.config.allowedList;
     }
     get serverList(){
         var ret = [];
-        for(let i = 0; i < this.data.allowedList.length; i++){
-            ret.push(this.data.allowedList[i].serverId);
+        for(let i = 0; i < this.config.allowedList.length; i++){
+            ret.push(this.config.allowedList[i].serverId);
         }
         return ret;
     }
