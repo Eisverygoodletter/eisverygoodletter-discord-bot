@@ -18,7 +18,7 @@ firebase.initializeApp(firebaseConfig); // FIREBASE_CONFIG variable
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
 const db = firebase.firestore();
-
+global.db = db;
 
 // tokening
 global.tokenIdCounter = 0;

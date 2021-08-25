@@ -8,8 +8,27 @@ function allow(params, msg, client){
     var thisTokenData = global.tokenList.find((element)=> element.username === username);
     if(thisTokenData == null){
         msg.reply("token data object does not exist. resorting to direct database write");
+        global.db.collection("users").document(username).get().then(async (docSnapShot)=>{
+            // welcome to call back hell
+            if(docSnapShot.exists == false){
+                msg.reply("bro wtf the user doesn't even exist");
+            }
+            else{
+                var data = docSnapShot.data();
+                if(data.allowedList.some((element)=>element.serverId == newServerId && element.channelId == newChannelId)){
+                    // already exists
+                    msg.reply("user " + username + " is already allowed in this channel :/ did you mean !unallow?");
+                }
+                else{
+                    data.allowedList.push(addObj);
+                    // write the data
+                    global.db.collection("users").document(username).set(data);
+                }
+            }
+        });
     }
     else{
+        msg.reply("token data object found. data will be written to database once client connection is closed");
         thisTokenData.addChannel(addObj);
     }
 }
