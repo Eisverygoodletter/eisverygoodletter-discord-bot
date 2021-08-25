@@ -24,6 +24,7 @@ const db = firebase.firestore();
 global.tokenIdCounter = 0;
 class tokenData{
     checkExist(){
+        console.log(global.tokenList);
         if(this.pinged == false){
             // destroy itself
             clearInterval(this.intervalNum);
@@ -42,7 +43,7 @@ class tokenData{
         global.tokenIdCounter += 1;
         this.pinged = false;
         // start a setTimeout function to check if it should still exist after 1 minute
-        this.intervalNum = setInterval(this.checkExist, 1000 * 10);
+        this.intervalNum = setInterval(()=>{this.checkExist()}, 1000 * 10);
         console.log(this.intervalNum);
     }
 }
