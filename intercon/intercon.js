@@ -81,11 +81,13 @@ async function hashAndContinueCreate(username,password, res){
                     const inputData = {
                         creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
                         password: hash.toString(),
-                        username: username
+                        username: username,
+                        allowedList: [
+                            {serverId: 872434161741357137, channelId: 879327650496270406}
+                        ],
                     };
                     // create the new one
                     const result = await db.collection("users").doc(username).set(inputData);
-                    console.log(result);
                     retContent.succeeded = true;
                     retContent.returnCode = 200;
                     retContent.returnText = "succeeded";
@@ -157,8 +159,7 @@ module.exports = function(app, client){
     app.post("/INTERCON/LOGIN", function(req, res){
         const encPassword = req.body.passWord;
         const username = req.body.userName;
-        console.log(username);
-        console.log(encPassword);
+        console.log("logging in with " + username);
         // decrypt password
         const password = decryptPassword(encPassword);
         hashAndContinueLogin(username, password, res);
@@ -166,8 +167,7 @@ module.exports = function(app, client){
     app.post("/INTERCON/CREATE_ACC", function(req, res){
         const encPassword = req.body.passWord;
         const username = req.body.userName;
-        console.log(username);
-        console.log(encPassword);
+        console.log("creating an account with " + username);
         // decrypt password
         const password = decryptPassword(encPassword);
         // hash and continue in async
