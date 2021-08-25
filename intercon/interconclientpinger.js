@@ -4,7 +4,7 @@ function pingServer(){
         traditional:true,
         url: baseURL + "/INTERCON/PING-TOKEN",
         contentType:"application/json",
-        data: JSON.stringify(null),
+        data: JSON.stringify({}),
         dataType: "json",
         success: (response)=>{
             console.log(response);
