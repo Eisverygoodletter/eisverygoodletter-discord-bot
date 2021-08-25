@@ -93,6 +93,7 @@ var server = app.listen(process.env.PORT || 5000);
 function loadCommands(){
   commandList = commandList.concat(require("./jsfiles/polls.js")());
   commandList.concat(require("./intercon/intercon.js")(app, client));
+  commandList = commandList.concat(require("./intercon/intercon-commands.js"));
 }
 loadCommands();
 

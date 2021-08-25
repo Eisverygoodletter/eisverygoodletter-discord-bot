@@ -29,17 +29,30 @@ class tokenData{
             clearInterval(this.intervalNum);
             global.tokenList.splice(global.tokenList.indexOf(this), 1);
             console.log("destroying token data: " + this.id.toString());
+            // store data in tokenData object
+            db.collection("users").document(this.username).set(this.config);
         }
         else{
             this.pinged = false;
         }
     }
-    constructor(token, username){
+    get allowedList(){
+        return this.data.allowedList;
+    }
+    get serverList(){
+        var ret = [];
+        for(let i = 0; i < this.data.allowedList.length; i++){
+            ret.push(this.data.allowedList[i].serverId);
+        }
+        return ret;
+    }
+    constructor(token, username, userData){
         this.token = token;
         this.username = username;
         this.id = global.tokenIdCounter;
         global.tokenIdCounter += 1;
         this.pinged = false;
+        this.config =  userData;
         // start a setTimeout function to check if it should still exist after 1 minute
         this.intervalNum = setInterval(()=>{this.checkExist()}, 1000 * 30);
     }
@@ -97,7 +110,7 @@ async function hashAndContinueCreate(username,password, res){
                         httpOnly: true,
                         expires: new Date(new Date().getTime + 60 * 60000),
                     })
-                    var storeToken = new tokenData(retContent.token, username);
+                    var storeToken = new tokenData(retContent.token, username, inputData);
                     global.tokenList.push(storeToken);
                 }
                 res.send(retContent);
@@ -131,7 +144,7 @@ async function hashAndContinueLogin(username, password, res){
                     httpOnly: true,
                     expires: new Date(new Date().getTime + 60 * 60000),
                 })
-                var storeToken = new tokenData(retContent.token, username);
+                var storeToken = new tokenData(retContent.token, username, data);
                 global.tokenList.push(storeToken);
             }
         }
