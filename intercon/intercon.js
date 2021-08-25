@@ -152,6 +152,9 @@ module.exports = function(app, client){
     app.get("/interconclient.js", function(req, res){
         res.sendFile("./interconclient.js", {root: __dirname});
     })
+    app.get("/interconclientpinger.js", function(req,res){
+        res.sendFile("./interconclientpinger.js", {root: __dirname});
+    })
     app.post("/INTERCON/LOGIN", function(req, res){
         const encPassword = req.body.passWord;
         const username = req.body.userName;
