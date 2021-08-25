@@ -5,9 +5,11 @@ const verifyJS = require("./jsfiles/verify.js");
 const express = require("express");
 var app = express();
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 app.use(cors());
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+app.use(cookieParser());
 
 
 var currentVerifying = []
