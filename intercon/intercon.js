@@ -29,7 +29,7 @@ class tokenData{
             // destroy itself
             clearInterval(this.intervalNum);
             global.tokenList.splice(global.tokenList.indexOf(this), 1);
-            console.log("destroying token data: " + this.id);
+            console.log("destroying token data: " + this.id.toString());
         }
         else{
             this.pinged = false;
@@ -91,7 +91,7 @@ async function hashAndContinueCreate(username,password, res){
                     retContent.returnCode = 200;
                     retContent.returnText = "succeeded";
                     retContent.token = await produceToken(username);
-                    res.cookie("tokenCookie", retContent.token, {
+                    res.cookie(process.env.tokenCookie, retContent.token, {
                         secure: true,
                         httpOnly: true,
                         expires: new Date(new Date().getTime + 60 * 60000),
@@ -125,7 +125,7 @@ async function hashAndContinueLogin(username, password, res){
                 retContent.returnCode = 200;
                 retContent.returnText = "succeeded";
                 retContent.token = await produceToken(username);
-                res.cookie("tokenCookie", retContent.token, {
+                res.cookie(process.env.tokenCookie, retContent.token, {
                     secure: true,
                     httpOnly: true,
                     expires: new Date(new Date().getTime + 60 * 60000),

@@ -49,6 +49,7 @@ function loginAccount(username, encPassword){
         }
     })
 }
+var globalPingIntervalId = null;
 
 $(document).ready(function(){
     // put all code in here
@@ -69,18 +70,22 @@ $(document).ready(function(){
             // a basic encryption will be added so that hackers can't just wireshark with no effort
             let today = new Date().toLocaleDateString();
             const encPassword = CryptoJS.AES.encrypt(password, today).toString(); // encryption using today's date
+            var token;
             if($("#modalNewInput").is(":checked")){
-                const token = createAccount(username, encPassword);
+                token = createAccount(username, encPassword);
                 //console.log(token);
             }
             else{
                 // login to the old account
                 console.log("requesting for log in...");
-                const token = loginAccount(username, encPassword);
+                token = loginAccount(username, encPassword);
             }
             // clean this function off
             $("#login").onclick = null;
             //$("#loginModal").modal("hide"); // destruction of the modal
+            
+            // activate ping interval
+            globalPingIntervalId = setInterval(pingServer, 3000);
         }
     });
 })
