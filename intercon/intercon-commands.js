@@ -21,8 +21,10 @@ function allow(params, msg, client){
                 }
                 else{
                     data.allowedList.push(addObj);
+                    console.log(data);
                     // write the data
                     global.db.collection("users").document(username).set(data);
+                    msg.reply("done");
                 }
             }
         });
@@ -30,6 +32,7 @@ function allow(params, msg, client){
     else{
         msg.reply("token data object found. data will be written to database once client connection is closed");
         thisTokenData.addChannel(addObj);
+        msg.reply("done")
     }
 }
 
