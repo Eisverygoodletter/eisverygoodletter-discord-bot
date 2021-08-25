@@ -2,7 +2,7 @@ function allow(params, msg, client){
     const newServerId = msg.guild.id;
     const newChannelId = msg.channel.id;
     const username = params[0];
-    console.log("allowing " + username + "in server " + newServerId.toString() + ", channel " + newChannelId.toString());
+    msg.reply("allowing " + username + "to access channel " + newChannelId.toString() + " of server " + newServerId.toString());
 }
 
 
