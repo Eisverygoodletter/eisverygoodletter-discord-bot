@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+global.clie = client;
 const http = require("http");
 const verifyJS = require("./jsfiles/verify.js");
 const express = require("express");
@@ -93,7 +94,7 @@ var server = app.listen(process.env.PORT || 5000);
 function loadCommands(){
   commandList = commandList.concat(require("./jsfiles/polls.js")());
   commandList.concat(require("./intercon/intercon.js")(app, client));
-  commandList = commandList.concat(require("./intercon/intercon-commands.js")());
+  commandList = commandList.concat(require("./intercon/intercon-allows.js")());
 }
 loadCommands();
 

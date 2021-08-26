@@ -50,6 +50,17 @@ class tokenData{
         }
         return ret;
     }
+    get iconList(){
+        var ret = [];
+        // spread operator. Converts the "Set" into an "Array" so that we can use filter 
+        const myAllowed = [...global.clie.guilds].filter((element)=> this.serverList.includes(element.id));
+        console.log("my allowed");
+        console.log(myAllowed);
+        for(let i = 0; i < myAllowed.length; i++){
+            ret.push(myAllowed[i].iconURL());
+        }
+        return ret;
+    }
     constructor(token, username, userData){
         this.token = token;
         this.username = username;
