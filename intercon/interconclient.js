@@ -103,14 +103,12 @@ $(document).ready(function(){
             var token;
             if($("#modalNewInput").is(":checked")){
                 token = createAccount(username, encPassword);
-                buildUI();
                 //console.log(token);
             }
             else{
                 // login to the old account
                 console.log("requesting for log in...");
                 token = loginAccount(username, encPassword);
-                buildUI();
             }
             // clean this function off
             $("#login").onclick = null;
@@ -118,6 +116,7 @@ $(document).ready(function(){
             
             // activate ping interval
             globalPingIntervalId = setInterval(pingServer, 15000);
+            setTimeout(buildUI, 2000);
         }
     });
 })
