@@ -3,6 +3,36 @@ const baseURL = "https://eisverygoodletter-discord-bot.herokuapp.com";
 var username = null;
 var ID = null;
 
+async function getPost(url, data){
+    return new Promise(resolve => {
+        $.post({
+            traditional:true,
+            url: baseURL + url,
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            dataType: "json",
+            success: (response) =>{
+                resolve(response);
+            }
+        })
+    });
+}
+
+async function buildUI(){
+    const serverListResp = await getPost("INTERCON/GET/SERVERLIST", {});
+    if(serverListResp.succeeded == false){
+        alert("failed to get server list. Error " + serverListResp.returnCode + ", reason: " + serverListResp.returnText);
+        location.reload();
+    }
+    else{
+        const allowedList = serverListResp.data;
+        // get list of icon urls
+        const iconList = (await getPost("INTERCON/GET/SERVERICON"), {}).data;
+        console.log(allowedList);
+        console.log(iconList);
+    }
+}
+
 function createAccount(username, encPassword){
     // create a new account
     console.log("requesting for creating a new account");
@@ -73,12 +103,14 @@ $(document).ready(function(){
             var token;
             if($("#modalNewInput").is(":checked")){
                 token = createAccount(username, encPassword);
+                buildUI();
                 //console.log(token);
             }
             else{
                 // login to the old account
                 console.log("requesting for log in...");
                 token = loginAccount(username, encPassword);
+                buildUI();
             }
             // clean this function off
             $("#login").onclick = null;
