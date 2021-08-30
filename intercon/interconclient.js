@@ -28,8 +28,19 @@ async function buildUI(){
         const allowedList = serverListResp.returnData;
         // get list of icon urls
         const iconList = (await getPost("/INTERCON/GET/SERVERICON", {})).returnData;
-        console.log(allowedList);
-        console.log(iconList);
+        var addedServerIcons = [];
+        for(let i = 0; i < allowedList; i++){
+            if(!addedServerIcons.includes(allowedList[i].serverId)){
+                addedServerIcons.push(allowedList[i].serverId);
+                var newButton = document.createElement("button");
+                var newIcon = iconList.find((element) => element.serverId === allowedList[i].serverId).icon;
+                var actualIcon = document.createElement("img");
+                actualIcon.src = newIcon;
+                console.log(newIcon);
+                $("sidebarGroup").append(newButton);
+                newButton.append(actualIcon);
+            }
+        }
     }
 }
 
