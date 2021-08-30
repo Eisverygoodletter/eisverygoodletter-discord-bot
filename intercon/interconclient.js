@@ -29,7 +29,7 @@ async function buildUI(){
         // get list of icon urls
         const iconList = (await getPost("/INTERCON/GET/SERVERICON", {})).returnData;
         var addedServerIcons = [];
-        for(let i = 0; i < allowedList; i++){
+        for(let i = 0; i < allowedList.length; i++){
             if(!addedServerIcons.includes(allowedList[i].serverId)){
                 addedServerIcons.push(allowedList[i].serverId);
                 var newButton = document.createElement("button");
@@ -39,6 +39,7 @@ async function buildUI(){
                 console.log(newIcon);
                 $("sidebarGroup").append(newButton);
                 newButton.append(actualIcon);
+                
             }
         }
     }
