@@ -63,7 +63,7 @@ class tokenData{
         console.log("my allowed");
         console.log(myAllowed);
         for(let i = 0; i < myAllowed.length; i++){
-            ret.push(myAllowed[i].iconURL());
+            ret.push(myAllowed[i].icon);
         }
         return ret;
     }
