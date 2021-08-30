@@ -29,6 +29,7 @@ async function buildUI(){
         // get list of icon urls
         const iconList = (await getPost("/INTERCON/GET/SERVERICON", {})).returnData;
         var addedServerIcons = [];
+        console.log(iconList);
         for(let i = 0; i < allowedList.length; i++){
             if(!addedServerIcons.includes(allowedList[i].serverId)){
                 addedServerIcons.push(allowedList[i].serverId);
