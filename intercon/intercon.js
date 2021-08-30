@@ -52,19 +52,12 @@ class tokenData{
     }
     get iconList(){
         var ret = [];
-        // spread operator. Converts the "Set" into an "Array" so that we can use filter 
-        console.log(global.clie.guilds);
-        //const myAllowed = Array.from(global.clie.guilds.cache).filter((element)=> this.serverList.includes(element.id));
         var myAllowed = [];
         for(let i = 0; i < this.serverList.length; i++){
             myAllowed.push(global.clie.guilds.cache.get(this.serverList[i]));
         }
-        
-        //console.log("my allowed");
-        //console.log(myAllowed);
         for(let i = 0; i < myAllowed.length; i++){
             ret.push(myAllowed[i].icon);
-            console.log(myAllowed[i].iconURL());
         }
         return ret;
     }

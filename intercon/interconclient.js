@@ -25,9 +25,9 @@ async function buildUI(){
         location.reload();
     }
     else{
-        const allowedList = serverListResp.data;
+        const allowedList = serverListResp.returnData;
         // get list of icon urls
-        const iconList = (await getPost("/INTERCON/GET/SERVERICON", {})).data;
+        const iconList = (await getPost("/INTERCON/GET/SERVERICON", {})).returnData;
         console.log(allowedList);
         console.log(iconList);
     }
