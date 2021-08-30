@@ -60,10 +60,11 @@ class tokenData{
             myAllowed.push(global.clie.guilds.cache.get(this.serverList[i]));
         }
         
-        console.log("my allowed");
-        console.log(myAllowed);
+        //console.log("my allowed");
+        //console.log(myAllowed);
         for(let i = 0; i < myAllowed.length; i++){
             ret.push(myAllowed[i].icon);
+            console.log(myAllowed[i].iconURL());
         }
         return ret;
     }
