@@ -85,7 +85,7 @@ module.exports = function (app, client){
         }
         else{
             const imagePath = req.params.imagePath;
-            const webPath = req.params.webPath;
+            const webPath = req.body.webPath;
             var actualPath = global.path.join(__dirname, process.env.IMAGEPATHNAME, imagePath);
             if(fs.existsSync(actualPath)){
                 // make a request for the image from the discord cdn

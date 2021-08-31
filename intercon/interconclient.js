@@ -36,9 +36,13 @@ async function buildUI(){
                 var newButton = document.createElement("button");
                 var newIcon = iconList.find((element) => element.serverId === allowedList[i].serverId).icon;
                 var actualIcon = document.createElement("img");
-                actualIcon.src = newIcon;
-                console.log(newIcon);
-                $("sidebarGroup").append(newButton);
+                //actualIcon.src = newIcon;
+                //console.log(newIcon);
+                // newIcon is the url to the discord image. We need to send this request to the server
+                // and get the image from there
+                const dataScheme = (await getPost("/INTERCON/GET/IMAGE/" + allowedList[i].serverId.toString() + ".jpg",{webPath: newIcon}));
+                console.log(dataScheme);
+                $("#sidebarGroup").append(newButton);
                 newButton.append(actualIcon);
                 
             }
