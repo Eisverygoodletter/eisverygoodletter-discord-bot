@@ -132,7 +132,7 @@ $(document).ready(function(){
             //$("#loginModal").modal("hide"); // destruction of the modal
             
             // activate ping interval
-            pingServer();
+            setTimeout(pingServer, 1000);
             globalPingIntervalId = setInterval(pingServer, 15000);
             setTimeout(buildUI, 2000);
         }
