@@ -73,4 +73,32 @@ module.exports = function (app, client){
         }
         res.send(returnInfo);
     });
+    app.post("/INTERCON/GET/IMAGE/:imagePath/:webPath", async (req, res)=>{
+        const clientToken = req.cookies[process.env.tokenCookie];
+        var tokenObj = global.verifyToken(clientToken);
+        if(tokenObj != undefined){
+            res.send({
+                succeeded: false,
+                returnCode: 408,
+                returnText: "session timeout",
+            })
+        }
+        else{
+            const imagePath = req.params.imagePath;
+            const webPath = req.params.webPath;
+            var actualPath = global.path.join(__dirname, process.env.IMAGEPATHNAME, imagePath);
+            if(fs.existsSync(actualPath)){
+                // make a request for the image from the discord cdn
+                await global.downloadImageJS.downloadToPath(actualPath, webPath);
+            }
+            // get the image in base64 encryption
+            const base64String = globla.fs.readFileSync(actualPath, "base64");
+            res.send({
+                succeeded: true,
+                returnCode: 200,
+                returnText: "succeeded",
+                returnCode: base64String,
+            });
+        }
+    });
 }
