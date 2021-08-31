@@ -73,7 +73,7 @@ module.exports = function (app, client){
         }
         res.send(returnInfo);
     });
-    app.post("/INTERCON/GET/IMAGE/:imagePath", async (req, res)=>{
+    app.post("/INTERCON/GET/IMAGE", async (req, res)=>{
         const clientToken = req.cookies[process.env.tokenCookie];
         var tokenObj = global.verifyToken(clientToken);
         if(tokenObj != undefined){
@@ -84,7 +84,7 @@ module.exports = function (app, client){
             })
         }
         else{
-            const imagePath = req.params.imagePath;
+            const imagePath = req.body.imagePath;
             const webPath = req.body.webPath;
             var actualPath = global.path.join(__dirname, process.env.IMAGEPATHNAME, imagePath);
             if(fs.existsSync(actualPath)){
