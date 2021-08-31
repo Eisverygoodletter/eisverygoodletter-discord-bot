@@ -73,7 +73,7 @@ module.exports = function (app, client){
         }
         res.send(returnInfo);
     });
-    app.post("/INTERCON/GET/IMAGE/:imagePath/:webPath", async (req, res)=>{
+    app.post("/INTERCON/GET/IMAGE/:imagePath", async (req, res)=>{
         const clientToken = req.cookies[process.env.tokenCookie];
         var tokenObj = global.verifyToken(clientToken);
         if(tokenObj != undefined){
