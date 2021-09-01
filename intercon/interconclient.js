@@ -54,51 +54,55 @@ async function buildUI(){
     }
 }
 
-function createAccount(username, encPassword){
+async function createAccount(username, encPassword){
     // create a new account
-    console.log("requesting for creating a new account");
-    $.post({
-        traditional: true,
-        url: baseURL + "/INTERCON/CREATE_ACC",
-        contentType: "application/json",
-        data:JSON.stringify({userName: username, passWord: encPassword}),
-        dataType: "json",
-        success: (response)=>{
-            console.log(response);
-            if(response.succeeded === true){
-                const token = response.token; // note that token MUST NOT BE IN PUBLIC SCOPE AND MUST NOT BE SHOWN
-                // token will act as a password for the current section. It is to be protected by the https protocol
-                return token;
+    return new Promise((resolve)=>{
+        console.log("requesting for creating a new account");
+        $.post({
+            traditional: true,
+            url: baseURL + "/INTERCON/CREATE_ACC",
+            contentType: "application/json",
+            data:JSON.stringify({userName: username, passWord: encPassword}),
+            dataType: "json",
+            success: (response)=>{
+                console.log(response);
+                if(response.succeeded === true){
+                    const token = response.token; // note that token MUST NOT BE IN PUBLIC SCOPE AND MUST NOT BE SHOWN
+                    // token will act as a password for the current section. It is to be protected by the https protocol
+                    return resolve(token);
+                }
+                else{
+                    alert("failed to create account. Error " + response.returnCode.toString() + ", reason: " + response.returnText);
+                    //alert("this page will now be reloaded.");
+                    location.reload();
+                    return resolve(false);
+                }
             }
-            else{
-                alert("failed to create account. Error " + response.returnCode.toString() + ", reason: " + response.returnText);
-                //alert("this page will now be reloaded.");
-                location.reload();
-                return false;
-            }
-        }
+        });
     });
 }
 
-function loginAccount(username, encPassword){
-    $.post({
-        traditional: true,
-        url: baseURL + "/INTERCON/LOGIN",
-        contentType: "application/json",
-        data: JSON.stringify({userName: username, passWord: encPassword}),
-        dataType: "json",
-        success: (response)=>{
-            console.log(response);
-            if(response.succeeded == true){
-                const token = response.token;
-                return token;
+async function loginAccount(username, encPassword){
+    return new Promise((resolve)=>{
+        $.post({
+            traditional: true,
+            url: baseURL + "/INTERCON/LOGIN",
+            contentType: "application/json",
+            data: JSON.stringify({userName: username, passWord: encPassword}),
+            dataType: "json",
+            success: (response)=>{
+                console.log(response);
+                if(response.succeeded == true){
+                    const token = response.token;
+                    return token;
+                }
+                else{
+                    alert("failed to login to account. Error " + response.returnCode.toString() + ", reason: " + response.returnText);
+                    location.reload();
+                }
             }
-            else{
-                alert("failed to login to account. Error " + response.returnCode.toString() + ", reason: " + response.returnText);
-                location.reload();
-            }
-        }
-    })
+        });
+    });    
 }
 var globalPingIntervalId = null;
 

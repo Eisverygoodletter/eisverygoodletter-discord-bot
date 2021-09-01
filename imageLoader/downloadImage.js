@@ -3,6 +3,7 @@ async function downloadToPath(pathName, imageURL){
         const file = global.fs.createWriteStream(pathName);
         const request = global.http.get(imageURL, function(response){
             response.pipe(file);
+            console.log("piping to file :)");
             resolve();
         })
     });
