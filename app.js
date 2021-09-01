@@ -23,6 +23,8 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cookieParser());
 
+var server = app.listen(process.env.PORT || 5000);
+
 
 var currentVerifying = []
 var commandList = []; // in the format of {commandName:___, details:{}}
@@ -94,7 +96,7 @@ client.login(process.env.BOT_TOKEN);
 
 
 
-var server = app.listen(process.env.PORT || 5000);
+
 
 
 /*
