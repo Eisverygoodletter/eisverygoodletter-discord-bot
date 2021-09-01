@@ -76,11 +76,11 @@ module.exports = function (app, client){
     app.post("/INTERCON/GET/IMAGE", async (req, res)=>{
         const clientToken = req.cookies[process.env.tokenCookie];
         var tokenObj = global.verifyToken(clientToken);
-        if(tokenObj != undefined){
+        if(tokenObj == undefined){
             res.send({
                 succeeded: false,
                 returnCode: 408,
-                returnText: "session timeout",
+                returnText: "session timeout: failed to get image",
             })
         }
         else{
@@ -97,7 +97,7 @@ module.exports = function (app, client){
                 succeeded: true,
                 returnCode: 200,
                 returnText: "succeeded",
-                returnCode: base64String,
+                returnData: base64String,
             });
         }
     });
