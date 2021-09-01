@@ -92,7 +92,7 @@ module.exports = function (app, client){
                 await global.downloadImageJS.downloadToPath(actualPath, webPath);
             }
             // get the image in base64 encryption
-            const base64String = globla.fs.readFileSync(actualPath, "base64");
+            const base64String = global.fs.readFileSync(actualPath, "base64");
             res.send({
                 succeeded: true,
                 returnCode: 200,
