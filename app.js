@@ -6,7 +6,6 @@ const http = require("http");
 global.http = http;
 const fs = require("fs");
 global.fs = fs;
-const request = require("request");
 const verifyJS = require("./jsfiles/verify.js");
 global.verifyJS = verifyJS;
 const express = require("express");
