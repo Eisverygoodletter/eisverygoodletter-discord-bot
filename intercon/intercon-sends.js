@@ -96,7 +96,7 @@ module.exports = function (app, client){
             console.log("getting dem file");
             */
             // get the image in base64 encryption
-            const base64String = global.downloadImageJS.getImageBase64(webPath);
+            const base64String = await global.downloadImageJS.getImageBase64(webPath);
             res.send({
                 succeeded: true,
                 returnCode: 200,
