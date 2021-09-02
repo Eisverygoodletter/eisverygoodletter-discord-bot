@@ -92,6 +92,7 @@ module.exports = function (app, client){
                 console.log("downloading from cdn: " + webPath);
                 global.downloadImageJS.downloadToPath(actualPath, webPath);
             }
+            console.log("getting dem file");
             // get the image in base64 encryption
             const base64String = global.fs.readFileSync(actualPath, "base64");
             res.send({
