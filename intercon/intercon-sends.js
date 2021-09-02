@@ -90,7 +90,7 @@ module.exports = function (app, client){
             if(!fs.existsSync(actualPath)){
                 // make a request for the image from the discord cdn
                 console.log("downloading from cdn: " + webPath);
-                await global.downloadImageJS.downloadToPath(actualPath, webPath);
+                global.downloadImageJS.downloadToPath(actualPath, webPath);
             }
             // get the image in base64 encryption
             const base64String = global.fs.readFileSync(actualPath, "base64");
