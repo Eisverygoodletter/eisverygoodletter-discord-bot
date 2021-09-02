@@ -46,6 +46,7 @@ async function buildUI(){
                 }
                 const dataScheme = (await getPost("/INTERCON/GET/IMAGE", sendInfo));
                 console.log(dataScheme);
+                actualIcon.src = dataScheme.returnData;
                 $("#sidebarGroup").append(newButton);
                 newButton.append(actualIcon);
                 
