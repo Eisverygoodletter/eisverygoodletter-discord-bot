@@ -86,6 +86,7 @@ module.exports = function (app, client){
         else{
             const imagePath = req.body.imagePath;
             const webPath = req.body.webPath;
+            /*
             var actualPath = global.path.join(__dirname, process.env.IMAGEPATHNAME, imagePath);
             if(!fs.existsSync(actualPath)){
                 // make a request for the image from the discord cdn
@@ -93,6 +94,7 @@ module.exports = function (app, client){
                 global.downloadImageJS.downloadToPath(actualPath, webPath);
             }
             console.log("getting dem file");
+            */
             // get the image in base64 encryption
             const base64String = global.downloadImageJS.getImageBase64(webPath);
             res.send({
