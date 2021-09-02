@@ -1,7 +1,7 @@
 async function downloadToPath(pathName, imageURL){
     return new Promise(resolve => {
         const file = global.fs.createWriteStream(pathName);
-        const request = global.http.get(imageURL, function(response){
+        const request = global.https.get(imageURL, function(response){
             response.pipe(file);
             console.log("piping to file :)");
             resolve();
