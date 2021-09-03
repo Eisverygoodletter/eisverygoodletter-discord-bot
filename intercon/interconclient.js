@@ -49,7 +49,14 @@ async function buildUI(){
                 actualIcon.src = dataScheme.returnData;
                 $("#sidebarGroup").append(newButton);
                 newButton.append(actualIcon);
-                
+                // set button stats
+                newButton.classList.add("rounded-circle");
+                newButton.style.position = "relative";
+                newButton.style.left = "1vw";
+                // set image stats
+                actualIcon.classList.add("rounded-circle");
+                actualIcon.style.width = "15vw";
+                actualIcon.style.height = "15vw";
             }
         }
     }
