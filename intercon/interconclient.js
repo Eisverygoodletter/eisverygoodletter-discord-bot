@@ -55,8 +55,8 @@ async function buildUI(){
                 newButton.style.left = "1vw";
                 // set image stats
                 actualIcon.classList.add("rounded-circle");
-                actualIcon.style.width = "15vw";
-                actualIcon.style.height = "15vw";
+                actualIcon.style.width = "5vw";
+                actualIcon.style.height = "5vw";
             }
         }
     }
