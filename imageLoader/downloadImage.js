@@ -17,6 +17,5 @@ async function getImageBase64(imageURL){
 
 
 module.exports = {
-    downloadToPath,
     getImageBase64
 }
