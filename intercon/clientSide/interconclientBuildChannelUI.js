@@ -9,7 +9,7 @@ async function generateChannelUI(info){
         return;
     }
     // clear entire current channel list
-    $("#channebarGroup").empty();
+    $("#channebarGroup").text("");
     // get a list of the required channelIds
     var channelIdList = [];
     for(let i = 0; i < result.returnData.length; i++){
