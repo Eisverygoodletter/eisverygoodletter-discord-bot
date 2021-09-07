@@ -29,6 +29,12 @@ module.exports = function (app, client){
         }
         res.send(returnInfo);
     });
+
+
+    // INFO IN TERMS OF SERVER AND CHANNEL NAMES AND ID *****************************************************************************
+
+
+
     /* --- GET/SERVERLIST --- */
     app.post("/INTERCON/GET/SERVERLIST", async (req, res)=>{
         const clientToken = req.cookies[process.env.tokenCookie];
@@ -73,6 +79,61 @@ module.exports = function (app, client){
         }
         res.send(returnInfo);
     });
+    /* --- GET/SERVERNAME --- */
+    app.post("/INTERCON/GET/SERVERNAME", async(req, res)=>{
+        const clientToken = req.cookies[process.env.tokenCookie];
+        const tokenObj = global.verifyToken(clientToken);
+        var returnInfo = null;
+        if(tokenObj != undefined){
+            const server = client.guilds.cache.get(req.body.serverId);
+            const name = server.name;
+            returnInfo = {
+                succeeded:true,
+                returnCode: 200,
+                returnText: "success",
+                returnData: name,
+            };
+        }
+        else{
+            returnInfo = {
+                succeeded: false,
+                returnCode: 408,
+                returnText: "session timeout",
+            };
+        }
+        res.send(returnInfo);
+    });
+    /* --- GET/CHANNELNAME --- */
+    app.post("/INTERCON/GET/CHANNELNAME", async(req, res)=>{
+        const clientToken = req.cookies[process.env.tokenCookie];
+        const tokenObj = global.verifyToken(clientToken);
+        var returnInfo = null;
+        if(tokenObj != undefined){
+            const server = client.guilds.cache.get(req.body.serverId);
+            const channel = server.channels.cache.get(req.body.channelId);
+            returnInfo = {
+                succeeded: true,
+                returnCode: 200,
+                returnText: "success",
+                returnData: channel.name,
+            }
+        }
+        else{
+            returnInfo = {
+                succeeded:true,
+                returnCode: 408,
+                returnText: "session timeout"
+            }
+        }
+        res.send(returnInfo);
+    });
+
+
+
+    // IMAGE INFO *********************************************************************************************************
+
+
+
     app.post("/INTERCON/GET/IMAGE", async (req, res)=>{
         const clientToken = req.cookies[process.env.tokenCookie];
         var tokenObj = global.verifyToken(clientToken);
