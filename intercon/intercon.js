@@ -179,16 +179,16 @@ async function hashAndContinueLogin(username, password, res){
 module.exports = function(app, client){
     // first, define the webpage send
     app.get("/intercon", function(req,res){
-        res.sendFile("./intercon.html", {root: __dirname});
+        res.sendFile("./clientSide/intercon.html", {root: __dirname});
     });
     app.get("/interconclient.js", function(req, res){
-        res.sendFile("./interconclient.js", {root: __dirname});
+        res.sendFile("./clientSide/interconclient.js", {root: __dirname});
     })
     app.get("/interconclientpinger.js", function(req,res){
-        res.sendFile("./interconclientpinger.js", {root: __dirname});
+        res.sendFile("./clientSide/interconclientpinger.js", {root: __dirname});
     })
     app.get("/interconclientBuildUI.js", function(req, res){
-        res.sendFile("./interconclientBuildUI.js", {root: __dirname});
+        res.sendFile("./clientSide/interconclientBuildUI.js", {root: __dirname});
     });
     app.post("/INTERCON/LOGIN", function(req, res){
         const encPassword = req.body.passWord;

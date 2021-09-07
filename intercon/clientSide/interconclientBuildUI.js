@@ -38,6 +38,8 @@ async function buildUI(){
                 actualIcon.classList.add("rounded-circle");
                 actualIcon.style.width = "5vw";
                 actualIcon.style.height = "5vw";
+                let remberInfo = {serverId: allowedList[i].serverId, channelId: allowedList[i].channelId};
+                newButton.onclick = ()=>{} // TODO
             }
         }
     }
