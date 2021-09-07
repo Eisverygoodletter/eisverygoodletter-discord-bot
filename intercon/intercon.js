@@ -193,6 +193,9 @@ module.exports = function(app, client){
     app.get("/interconclientBuildChannelUI.js", (req,res)=>{
         res.sendFile("./clientSide/interconclientBuildChannelUI.js", {root: __dirname});
     });
+    app.get("/interconclientLoadChannelUI.js", (req, res)=>{
+        res.sendFile("./clientSide/interconclientLoadChannelUI.js", {root: __dirname});
+    });
     app.post("/INTERCON/LOGIN", function(req, res){
         const encPassword = req.body.passWord;
         const username = req.body.userName;
