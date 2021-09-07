@@ -1,7 +1,7 @@
 async function generateChannelUI(info){
     console.log(info);
     // first, get a new channel/server list from INTERCON/GET/SERVERLIST
-    const result = await getPost("INTERCON/GET/SERVERLIST", {});
+    const result = await getPost("/INTERCON/GET/SERVERLIST", {});
     // check if result succeeds
     if(result.succeeded == false){
         alert("error " + result.returnCode + ", reason: " + result.returnText);
@@ -21,7 +21,7 @@ async function generateChannelUI(info){
     // get list of channel names
     var channelNames = [];
     for(let i = 0; i < channelIdList.length; i++){
-        const res = await getPost("INTERCON/GET/CHANNELNAME", {serverId: info, channelId: channelIdList[i]});
+        const res = await getPost("/INTERCON/GET/CHANNELNAME", {serverId: info, channelId: channelIdList[i]});
         if(res.succeeded == false){
             alert("oof");
             break;
