@@ -32,7 +32,7 @@ async function buildUI(){
                 newButton.append(actualIcon);
                 // set button stats
                 newButton.classList.add("rounded-circle");
-                newButton.style.position = "absolute";
+                newButton.style.position = "relative";
                 newButton.style.left = "15%";
                 // set image stats
                 actualIcon.classList.add("rounded-circle");
