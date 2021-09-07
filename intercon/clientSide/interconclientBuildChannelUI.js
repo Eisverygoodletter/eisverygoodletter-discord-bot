@@ -32,7 +32,9 @@ async function generateChannelUI(info){
     console.log(channelNames);
     for(let i = 0; i < channelNames.length; i++){
         var element = document.createElement("button");
-        element.textContent = channelNames[i];
+        element.textContent = "#" + channelNames[i];
+        element.classList.add("btn");
+        element.classList.add("btn-dark");
         $("#channelbarGroup").append(element);
     }
 }
