@@ -10,7 +10,6 @@ async function buildUI(){
         // get list of icon urls
         const iconList = (await getPost("/INTERCON/GET/SERVERICON", {})).returnData;
         var addedServerIcons = [];
-        console.log(iconList);
         for(let i = 0; i < allowedList.length; i++){
             if(!addedServerIcons.includes(allowedList[i].serverId)){
                 addedServerIcons.push(allowedList[i].serverId);
@@ -26,7 +25,6 @@ async function buildUI(){
                     imagePath: allowedList[i].serverId.toString() + ".jpg",
                 }
                 const dataScheme = (await getPost("/INTERCON/GET/IMAGE", sendInfo));
-                console.log(dataScheme);
                 actualIcon.src = dataScheme.returnData;
                 $("#sidebarGroup").append(newButton);
                 newButton.append(actualIcon);

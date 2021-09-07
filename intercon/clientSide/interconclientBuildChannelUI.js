@@ -1,5 +1,4 @@
 async function generateChannelUI(info){
-    console.log(info);
     // first, get a new channel/server list from INTERCON/GET/SERVERLIST
     const result = await getPost("/INTERCON/GET/SERVERLIST", {});
     // check if result succeeds
@@ -17,7 +16,6 @@ async function generateChannelUI(info){
             channelIdList.push(result.returnData[i].channelId);
         }
     }
-    console.log(channelIdList);
     // get list of channel names
     var channelNames = [];
     for(let i = 0; i < channelIdList.length; i++){
@@ -29,12 +27,14 @@ async function generateChannelUI(info){
         channelNames.push(res.returnData);
     }
     // generate elements for each channel name
-    console.log(channelNames);
+    // also, link them to the loadChannel function
     for(let i = 0; i < channelNames.length; i++){
         var element = document.createElement("button");
         element.textContent = "#" + channelNames[i];
         element.classList.add("btn");
         element.classList.add("btn-dark");
         $("#channelbarGroup").append(element);
+        let rember = {serverId: info, channelId: channelIdList[i]};
+        element.onclick = ()=>{loadChannelUI(rember);};
     }
 }
