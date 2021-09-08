@@ -38,6 +38,16 @@
         <div id="channelbarGroup" class="btn-group-vertical bg-info pre-scrollable" style="left:0px; top:0px;height: 100vh; float:left">
         
         </div>
+        <form id="paragraphForm" class="form-row" style="float:left; height:100%;" onsubmit="return false">
+            <div class="form-group" style="width:100%; position:absolute">
+                <div class="list-group" id="textList">
+                    <a href="#" class="border list-group-item list-group-action disabled bg-dark">Welcome!</a>
+                </div>
+            </div>
+            <div class="form-group" style="position:absolute;bottom:1px; width:100%;" placeholder="chat here">
+                <input type="text" class="form-control" id="sendText">
+            </div>
+        </form>
     </body>
     <!-- pinger goes first as it doesn't require any other scripts-->
     <script src="interconclientpinger.js"></script>
