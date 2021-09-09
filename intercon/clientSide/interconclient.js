@@ -18,6 +18,11 @@ async function getPost(url, data){
     });
 }
 
+async function handleReplyFail(reply){
+    alert("error " + reply.returnCode + ", Reason: " + reply.returnText);
+    location.reload();
+}
+
 async function createAccount(username, encPassword){
     // create a new account
     return new Promise((resolve)=>{

@@ -1,5 +1,12 @@
 async function loadChannelUI(info){
-    
+    const reply = await getPost("/INTERCON/GET/CHANNELMSG");
+    if(reply.succeeded == false){
+        handleReplyFail(reply);
+        return;
+    }
+    var messages = reply.returnData;
+    // turn them into understandable html elements
+    console.log(messages);
 }
 
 async function sendMsg(event){
