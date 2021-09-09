@@ -40,6 +40,14 @@ class tokenData{
         this.config.allowedList.push(obj);
         console.log(this.username + " is now allowed to go to " + obj.serverId.toString() + ", " + obj.channelId.toString());
     }
+    containsChannel(serverId, channelId){
+        for(let i = 0; i < this.allowedList.length; i++){
+            if(this.allowedList[i].channelId == channelId && this.allowedList[i].serverId == serverId){
+                return true;
+            }
+        }
+        return false;
+    }
     get allowedList(){
         return this.config.allowedList;
     }

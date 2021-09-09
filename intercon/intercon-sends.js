@@ -120,9 +120,45 @@ module.exports = function (app, client){
         }
         else{
             returnInfo = {
-                succeeded:true,
+                succeeded:false,
                 returnCode: 408,
                 returnText: "session timeout"
+            }
+        }
+        res.send(returnInfo);
+    });
+
+    /* --- GET/CHANNELMSG --- */
+    app.post("/INTERCON/GET/CHANNELMSG", async(req, res)=>{
+        const clientToken = req.cookies[process.env.tokenCookie];
+        const tokenObj = global.verifyToken(clientToken);
+        var returnInfo;
+        if(tokenObj != undefined){
+            if(tokenObj.containsChannel(req.body.serverId, req.body.channelId)){
+                // fetch messages
+                const server = client.guilds.cache.get(req.body.serverId);
+                const channel = server.channels.cache.get(req.body.channelId);
+                var messages = await channel.messages.fetch({limit: 100});
+                returnInfo = {
+                    succeeded: true,
+                    returnCode: 200,
+                    returnText: "=)",
+                    returnData: messages,
+                }
+            }
+            else{
+                returnInfo = {
+                    succeeded: false,
+                    returnCode: 403,
+                    returnText: "no access allowed"
+                }
+            }
+        }
+        else{
+            returnInfo = {
+                succeeded:false,
+                returnCode: 408,
+                returnText: "session timeout",
             }
         }
         res.send(returnInfo);
