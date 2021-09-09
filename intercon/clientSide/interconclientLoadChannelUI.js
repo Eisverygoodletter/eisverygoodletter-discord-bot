@@ -9,6 +9,7 @@ async function loadChannelUI(info){
     var messages = reply.returnData;
     // clean up the chat first
     $("#textList").html("");
+    console.log(messages);
     // turn them into understandable html elements
     for(let i = 0; i < messages.length; i++){
         var element = document.createElement("a");
