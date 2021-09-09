@@ -15,7 +15,7 @@ async function loadChannelUI(info){
         var element = document.createElement("a");
         element.href = "#";
         element.classList.add("border", "list-group-item", "list-group-action", "disabled", "bg-dark");
-        element.textContent = messages[i].author + ": " + element[i].content;
+        element.textContent = messages[i].author + ": " + messages[i].content;
         $("#textList").append(element);
     }
 }
