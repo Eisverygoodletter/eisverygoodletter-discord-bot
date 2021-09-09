@@ -1,5 +1,5 @@
 async function loadChannelUI(info){
-    const reply = await getPost("/INTERCON/GET/CHANNELMSG");
+    const reply = await getPost("/INTERCON/GET/CHANNELMSG", info);
     if(reply.succeeded == false){
         handleReplyFail(reply);
         return;
