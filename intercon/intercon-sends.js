@@ -138,7 +138,7 @@ module.exports = function (app, client){
                 // fetch messages
                 const server = client.guilds.cache.get(req.body.serverId);
                 const channel = server.channels.cache.get(req.body.channelId);
-                var messages = await channel.messages.fetch({limit: 100});
+                var messages = await channel.messages.fetch({limit: req.body.msgAmount});
                 returnInfo = {
                     succeeded: true,
                     returnCode: 200,

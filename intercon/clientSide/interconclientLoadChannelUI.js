@@ -1,12 +1,22 @@
 async function loadChannelUI(info){
-    const reply = await getPost("/INTERCON/GET/CHANNELMSG", info);
+    var send = info;
+    send.msgAmount = 100;
+    const reply = await getPost("/INTERCON/GET/CHANNELMSG", send);
     if(reply.succeeded == false){
         handleReplyFail(reply);
         return;
     }
     var messages = reply.returnData;
+    // clean up the chat first
+    $("#textList").html("");
     // turn them into understandable html elements
-    console.log(messages);
+    for(let i = 0; i < messages.length; i++){
+        var element = document.createElement("a");
+        element.href = "#";
+        element.classList.add("border", "list-group-item", "list-group-action", "disabled", "bg-dark");
+        element.textContent = messages[i].author + ": " + element[i].content;
+        $("#textList").append(element);
+    }
 }
 
 async function sendMsg(event){
