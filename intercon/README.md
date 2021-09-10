@@ -40,12 +40,14 @@ else{
 ```
 
 # the password encryption standard
-from client - server side, it is encrypted in AES. The encryption key is the current date. Example:
+from client - server side, the password is encrypted in AES. The encryption key is the current date. Example:
 ```javascript
 const password = "cool password"
 let today = new Date().toLocaleDateString();
 const encPassword = CryptoJS.AES.encrypt(password, today).toString();
 ```
+bcrypt is used on the serverside to hash the passwords before sending them into the database.\
+The hashing salt is in the environmental variables and nobody remembers what it is
 
 ## list of all POST requests allowed
 - ## /INTERCON/LOGIN
@@ -59,7 +61,7 @@ const encPassword = "already encrypted password"
 const username = "username"
 const res = await getPost("/INTERCON/LOGIN",{userName: username, passWord: encPassword});
 if (res.succeeded) {
-    const token = res.returnData
+    const token = res.returnData;
 }
 ```
 </details>
@@ -119,12 +121,12 @@ returns a list of objects with\
 requires no parameters\
 ```javascript
 {
-    icon, // a base64 string representation of the icon. e.g.
-          // data:image/jpg;base64,IasdfVasdfSmrandomTeXt
+    icon, // a web link for the icon in the discord cdn.
     serverId // a number
 }
 ```
 note that this request is often used in conjunction with `/INTERCON/GET/SERVERLIST`. The objects they send out both contain the `serverId` property (as with all new requests that return a list of data).
+It is also often used with `/INTERCON/GET/IMAGE` to get the base64 string representation of the image
 <details>
 <summary>Example</summary>
 
@@ -135,10 +137,13 @@ if(res.succeeded){
     for(let i = 0; i < list.length; i++){
         // create an img element
         var imgElement = document.createElement("img");
-        // the icon base64 string can be directly used as the src
-        imgElement.src = list[i].icon;
-        // always remember to append the element after creating it.
-        someContainerElement.append(imgElement);
+        // get icon base64 string
+        const resp = await getPost("/INTERCON/GET/IMAGE", {webPath: list[i].icon});
+        if (resp.succeeded) {
+            imgElement.src = resp.returnData;
+            // always remember to append the element after creating it.
+            someContainerElement.append(imgElement);
+        }
     }
 }
 ```
@@ -177,7 +182,22 @@ console.log(serverNameList);
 ```
 </details>
 
+- ## /INTERCON/GET/CHANNELNAME
+works exactly the same way as `/INTERCON/GET/SERVERNAME`\
+requires two parameters: `serverId` and `channelId`\
+returns a string
 
+- ## /INTERCON/GET/CHANNELMSG
+returns an array of **raw** discord message objects.
+required parameters: `serverId`, `channelId`, and `msgAmount`
+due do this being an array of **raw** discord `message` objects,\
+it is likely that some objects like the `author` property, which is a\
+`get` function will be removed when being stringified in JSON
 
-## list of all file GET requests allowed
-figure it out yourself
+- ## /INTERCON/GET/IMAGE
+returns the base64 string representation of the image.
+requires `webPath`.
+Although you can normally just directly request the discord cdn for a message,\
+this method of getting the image keeps your connections consistent as you are\
+only trying to access data from 1 server.
+
