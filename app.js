@@ -20,7 +20,12 @@ const downloadImageJS = require("./imageLoader/downloadImage.js");
 global.downloadImageJS = downloadImageJS;
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-app.use(cors());
+
+const corsOptions = {
+  origin: JSON.parse(process.env.JSON_ORIGIN),
+  optionSuccessStatus: 200,
+}
+app.use(cors(corsOptions));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cookieParser());
