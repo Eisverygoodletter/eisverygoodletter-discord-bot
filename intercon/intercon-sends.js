@@ -164,7 +164,31 @@ module.exports = function (app, client){
         res.send(returnInfo);
     });
 
-
+    // INFO SET ****************************************************************************************************************
+    /* --- SET/CHANNELSEND */
+    app.post("/INTERCON/SET/CHANNELSEND", async(req, res)=>{
+        const clientToken = req.cookies[process.env.tokenCookie];
+        const tokenObj = global.verifyToken(clientToken);
+        var returnInfo = {
+            succeeded: false,
+            returnCode: 408,
+            returnText: "ok frick this",
+        };
+        if(tokenObj != undefined){
+            if(tokenObj.containsChannel(req.body.serverId, req.body.channelId)){
+                const server = client.guilds.cache.get(req.body.serverId);
+                const channel = server.channels.cache.get(req.body.channelId);
+                channel.send(req.body.msg);
+                returnInfo = {
+                    succeeded: true,
+                    returnCode: 200,
+                    returnText: "reee",
+                    returnData: true,
+                }
+            }
+        }
+        res.send(returnInfo);
+    });
 
     // IMAGE INFO *********************************************************************************************************
 
