@@ -20,13 +20,14 @@ async function loadChannelUI(info){
         element.classList.add("border", "list-group-item", "list-group-action", "disabled", "bg-dark");
         // get username
         var currentUsername = "placeholder";
-        console.log(messages[i]);
-        if(!(messages[i].authorId in knownAuthorIds)){
-            const res = await getPost("/INTERCON/GET/AUTHORNAME", {authorId: messages[i].authorId});
+        //console.log(messages[i]);
+        if(!(messages[i].authorID in knownAuthorIds)){
+            const res = await getPost("/INTERCON/GET/AUTHORNAME", {authorId: messages[i].authorID});
             currentUsername = res.returnData;
+            knownAuthorIds[messages[i].authorID] = currentUsername;
         }
         else{
-            currentUsername = knownAuthorIds[messages[i].authorId];
+            currentUsername = knownAuthorIds[messages[i].authorID];
         }
 
         element.textContent = currentUsername + ": " + messages[i].content;
