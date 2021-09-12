@@ -1,5 +1,6 @@
 currentServerId = null;
 currentChannelId = null;
+knownAuthorIds = {};
 async function loadChannelUI(info){
     var send = info;
     send.msgAmount = 100;
@@ -18,10 +19,17 @@ async function loadChannelUI(info){
         element.href = "#";
         element.classList.add("border", "list-group-item", "list-group-action", "disabled", "bg-dark");
         // get username
+        var currentUsername = "placeholder";
         console.log(messages[i]);
-        const res = await getPost("/INTERCON/GET/AUTHORNAME", {authorId: messages[i].authorId});
+        if(!(messages[i].authorId in knownAuthorIds)){
+            const res = await getPost("/INTERCON/GET/AUTHORNAME", {authorId: messages[i].authorId});
+            currentUsername = res.returnData;
+        }
+        else{
+            currentUsername = knownAuthorIds[messages[i].authorId];
+        }
 
-        element.textContent = res.returnData + ": " + messages[i].content;
+        element.textContent = currentUsername + ": " + messages[i].content;
         $("#textList").append(element);
     }
     $("#textList").scrollTop($("#textList")[0].scrollHeight);

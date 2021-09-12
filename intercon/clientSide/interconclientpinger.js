@@ -7,7 +7,6 @@ function pingServer(){
         data: JSON.stringify({}),
         dataType: "json",
         success: (response)=>{
-            console.log(response);
             if(response.succeeded == false){
                 alert("Error " + response.returnCode + ", reason: " + response.returnText);
                 return false;
