@@ -17,7 +17,11 @@ async function loadChannelUI(info){
         var element = document.createElement("a");
         element.href = "#";
         element.classList.add("border", "list-group-item", "list-group-action", "disabled", "bg-dark");
-        element.textContent = "placeholder" + ": " + messages[i].content;
+        // get username
+        console.log(messages[i]);
+        const res = await getPost("/INTERCON/GET/AUTHORNAME", {authorId: messages[i].authorId});
+
+        element.textContent = res.returnData + ": " + messages[i].content;
         $("#textList").append(element);
     }
     $("#textList").scrollTop($("#textList")[0].scrollHeight);

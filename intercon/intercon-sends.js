@@ -164,6 +164,25 @@ module.exports = function (app, client){
         res.send(returnInfo);
     });
 
+    /* --- GET/AUTHORNAME --- */
+    app.post("/INTERCON/GET/AUTHORNAME", async(req, res)=>{
+        const clientToken = req.cookies[process.env.tokenCookie];
+        const tokenObj = global.verifyToken(clientToken);
+        var returnInfo = {
+            succeeded: false,
+            returnCode: 408,
+            returnText: "failed to get author name",
+        }
+        if(tokenObj != undefined){
+            const user = global.clie.fetchUser(req.body.authorId);
+            returnInfo.succeeded = true;
+            returnInfo.returnCode = 200;
+            returnText = "success";
+            returnText.returnData = user.username;
+        }
+        res/send(returnInfo);
+    });
+
     // INFO SET ****************************************************************************************************************
     /* --- SET/CHANNELSEND */
     app.post("/INTERCON/SET/CHANNELSEND", async(req, res)=>{
