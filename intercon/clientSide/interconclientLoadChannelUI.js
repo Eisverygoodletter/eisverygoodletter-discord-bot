@@ -36,6 +36,7 @@ async function sendMsg(msg){
         }
         const res = await getPost("/INTERCON/SET/CHANNELSEND", sendInfo);
         console.log(res);
+        loadChannelUI(sendInfo);
     }
 }
 
