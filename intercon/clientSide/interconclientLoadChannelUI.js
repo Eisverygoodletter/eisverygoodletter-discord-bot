@@ -30,7 +30,6 @@ async function loadChannelUI(info){
             currentUsername = knownAuthorIds[messages[i].authorID];
         }
         console.log("username");
-        console.log(currentUsername);
         element.textContent = currentUsername + ": " + messages[i].content;
         $("#textList").append(element);
     }

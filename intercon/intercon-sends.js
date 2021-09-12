@@ -177,9 +177,8 @@ module.exports = function (app, client){
             const user = global.clie.users.cache.find((user) => user.id === req.body.authorId);
             returnInfo.succeeded = true;
             returnInfo.returnCode = 200;
-            returnText = "success";
-            returnText.returnData = user.username;
-            console.log(returnInfo);
+            returnInfo.returnText = "success";
+            returnInfo.returnData = user.username;
         }
         res.send(returnInfo);
     });
