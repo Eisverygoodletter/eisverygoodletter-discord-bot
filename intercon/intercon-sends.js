@@ -175,11 +175,11 @@ module.exports = function (app, client){
         }
         if(tokenObj != undefined){
             const user = global.clie.users.cache.find((user) => user.id === req.body.authorId);
-            console.log(user);
             returnInfo.succeeded = true;
             returnInfo.returnCode = 200;
             returnText = "success";
             returnText.returnData = user.username;
+            console.log(returnInfo);
         }
         res.send(returnInfo);
     });
