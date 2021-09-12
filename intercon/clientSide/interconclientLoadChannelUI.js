@@ -1,3 +1,5 @@
+currentServerId = null;
+currentChannelId = null;
 async function loadChannelUI(info){
     var send = info;
     send.msgAmount = 100;
@@ -19,10 +21,22 @@ async function loadChannelUI(info){
         $("#textList").append(element);
     }
     $("#textList").scrollTop($("#textList")[0].scrollHeight);
+    currentServerId = info.serverId;
+    currentChannelId = info.channelId;
 }
 
 async function sendMsg(msg){
     console.log(msg);
+    if(currentServerId != null && currentChannelId != null){
+        // send the message
+        var sendInfo = {
+            serverId: currentServerId,
+            channelId: currentChannelId,
+            msg: msg,
+        }
+        const res = await getPost("/INTERCON/SET/CHANNELSEND", sendInfo);
+        console.log(res);
+    }
 }
 
 $(document).ready(()=>{
