@@ -15,4 +15,7 @@ function pingServer(){
             return true; // return true when succeeded
         }
     })
+    if(currentServerId != null && currentChannelId != null){
+        loadChannelUI({channelId: currentChannelId, serverId: currentServerId});
+    }
 }
