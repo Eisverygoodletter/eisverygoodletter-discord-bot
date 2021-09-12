@@ -21,8 +21,8 @@ async function loadChannelUI(info){
     $("#textList").scrollTop($("#textList")[0].scrollHeight);
 }
 
-async function sendMsg(event){
-    console.log($("#sendText").val());
+async function sendMsg(msg){
+    console.log(msg);
 }
 
 $(document).ready(()=>{
@@ -30,6 +30,7 @@ $(document).ready(()=>{
         if(e.key === "Enter" || e.keyCode === 13){
             const sendText = $("#sendText").val();
             $("#sendText").val(" ");
+            sendMsg(sendText);
         }
     });
 });

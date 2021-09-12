@@ -172,7 +172,7 @@ module.exports = function (app, client){
         var returnInfo = {
             succeeded: false,
             returnCode: 408,
-            returnText: "ok frick this",
+            returnText: "oops",
         };
         if(tokenObj != undefined){
             if(tokenObj.containsChannel(req.body.serverId, req.body.channelId)){
