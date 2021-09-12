@@ -174,13 +174,13 @@ module.exports = function (app, client){
             returnText: "failed to get author name",
         }
         if(tokenObj != undefined){
-            const user = global.clie.fetchUser(req.body.authorId);
+            const user = global.clie.users.cache.fetch(req.body.authorId);
             returnInfo.succeeded = true;
             returnInfo.returnCode = 200;
             returnText = "success";
             returnText.returnData = user.username;
         }
-        res/send(returnInfo);
+        res.send(returnInfo);
     });
 
     // INFO SET ****************************************************************************************************************
