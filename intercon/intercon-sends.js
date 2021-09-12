@@ -174,7 +174,7 @@ module.exports = function (app, client){
             returnText: "failed to get author name",
         }
         if(tokenObj != undefined){
-            const user = global.clie.users.cache.fetch(req.body.authorId);
+            const user = global.clie.users.cache.find((user) => user.id === req.body.authorId);
             returnInfo.succeeded = true;
             returnInfo.returnCode = 200;
             returnText = "success";
