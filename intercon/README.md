@@ -194,6 +194,12 @@ due do this being an array of **raw** discord `message` objects,\
 it is likely that some objects like the `author` property, which is a\
 `get` function will be removed when being stringified in JSON
 
+- ## /INTERCON/GET/AUTHORNAME
+returns a string which is the user/author's name\
+required parameters: `authorId`
+often used in conjunction with `/INTERCON/GET/CHANNELMSG` to get the message author names from their ids
+> :warning: Do not call this for every user. Cache the usernames on the clientside after you get the name so that you don't do 100 calls for author names every 100 messages loaded
+
 - ## /INTERCON/GET/IMAGE
 returns the base64 string representation of the image.
 requires `webPath`.
@@ -201,3 +207,7 @@ Although you can normally just directly request the discord cdn for a message,\
 this method of getting the image keeps your connections consistent as you are\
 only trying to access data from 1 server.
 
+- ## /INTERCON/SET/CHANNELSEND
+sends a message in the channel (and server) specified.
+requires `serverId`, `channelId`, `msg`
+will send with the client's username and `msg`
