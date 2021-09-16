@@ -113,8 +113,9 @@ client.login(process.env.BOT_TOKEN);
 
 function loadCommands(){
   commandList = commandList.concat(require("./jsfiles/polls.js")());
-  commandList.concat(require("./intercon/intercon.js")(app, client));
+  require("./intercon/intercon.js")(app, client);
   commandList = commandList.concat(require("./intercon/intercon-allows.js")());
+  app.use("/chess", require("./chess/serverSide/chess.js"));
 }
 loadCommands();
 
