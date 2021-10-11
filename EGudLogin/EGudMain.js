@@ -1,4 +1,4 @@
-var router = global.express.Router()
+var router = global.express.Router();
 var loginCache;
 async function findAccountWithToken(token){
     const loginRef = global.db.collection("eGudUsers");
@@ -35,5 +35,9 @@ async function checkLogin (req, res, next){
     next();
 }
 router.use(checkLogin);
+
+// actual routing stuff
+router.use("/login", require("./login/server/EGudLogin.js"));
+
 
 module.exports = router;
