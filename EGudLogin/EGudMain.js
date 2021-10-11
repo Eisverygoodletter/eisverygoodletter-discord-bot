@@ -16,11 +16,18 @@ async function placeLoginRedirectCookie(req, res){
     })
 }
 async function checkLogin (req, res, next){
+    console.log("url: ");
+    console.log(req.url);
+    if(req.url == "/game/login"){
+        next();
+        return;
+    }
     const clientToken = req.cookies[process.env.EGUD_TOKEN_COOKIE_NAME];
+
     // check if client has a token
     if (!(clientToken != null && clientToken != undefined)) {
         await placeLoginRedirectCookie(req, res);
-        res.redirect("/login");
+        res.redirect("./login");
         next();
         return;
     }
@@ -28,7 +35,7 @@ async function checkLogin (req, res, next){
     const findResult = await findAccountWithToken(clientToken);
     if(!findResult){
         await placeLoginRedirectCookie(req, res);
-        res.redirect("/login");
+        res.redirect("./login");
         next();
         return;
     }
