@@ -18,7 +18,7 @@ async function placeLoginRedirectCookie(req, res){
 async function checkLogin (req, res, next){
     console.log("url: ");
     console.log(req.url);
-    if(req.url == "/login"){
+    if(req.url == "/login" || req.url.endsWith(".js") || req.url.endsWith(".css")){
         next();
         return;
     }
