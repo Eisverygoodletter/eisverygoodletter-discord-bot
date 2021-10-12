@@ -15,6 +15,6 @@ router.get("/loginClient.css", sendLoginCSS);
 async function sendLoginJS(req, res){
     res.sendFile("client/loginClient.js", {root: __dirname});
 }
-router.get("/loginClient.js");
+router.get("/loginClient.js", sendLoginJS);
 
 module.exports = router;
