@@ -44,7 +44,7 @@ async function checkLogin (req, res, next){
 router.use(checkLogin);
 
 // actual routing stuff
-router.use("/login", require("./login/server/EGudLogin.js"));
+router.use("/login", require("./login/EGudLogin.js"));
 
 
 module.exports = router;
