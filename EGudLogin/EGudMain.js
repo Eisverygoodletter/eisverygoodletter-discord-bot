@@ -32,6 +32,7 @@ async function checkLogin (req, res, next){
         return;
     }
     // check if the token is valid
+    /*
     const findResult = await findAccountWithToken(clientToken);
     if(!findResult){
         await placeLoginRedirectCookie(req, res);
@@ -39,6 +40,7 @@ async function checkLogin (req, res, next){
         next();
         return;
     }
+    */
     next();
 }
 router.use(checkLogin);
