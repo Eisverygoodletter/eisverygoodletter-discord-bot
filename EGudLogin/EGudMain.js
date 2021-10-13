@@ -18,7 +18,7 @@ async function placeLoginRedirectCookie(req, res){
 async function checkLogin (req, res, next){
     console.log("url: ");
     console.log(req.url);
-    if(req.url == "/login" || req.url.endsWith(".js") || req.url.endsWith(".css")){
+    if(req.url == "/login/" || req.url.endsWith(".js") || req.url.endsWith(".css")){
         return next();
     }
     const clientToken = req.cookies[process.env.EGUD_TOKEN_COOKIE_NAME];
@@ -26,7 +26,7 @@ async function checkLogin (req, res, next){
     // check if client has a token
     if (!(clientToken != null && clientToken != undefined)) {
         await placeLoginRedirectCookie(req, res);
-        res.redirect("login/");
+        res.redirect("login");
         return next();
     }
     // check if the token is valid
@@ -34,7 +34,7 @@ async function checkLogin (req, res, next){
     const findResult = await findAccountWithToken(clientToken);
     if(!findResult){
         await placeLoginRedirectCookie(req, res);
-        res.redirect("login/");
+        res.redirect("login");
         return next();
     }
     
