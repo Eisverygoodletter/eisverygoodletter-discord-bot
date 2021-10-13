@@ -19,7 +19,7 @@ async function checkLogin (req, res, next){
     console.log("url: ");
     console.log(req.url);
     if(req.url == "/login" || req.url.endsWith(".js") || req.url.endsWith(".css")){
-        next();
+        return next();
     }
     const clientToken = req.cookies[process.env.EGUD_TOKEN_COOKIE_NAME];
 
@@ -27,7 +27,7 @@ async function checkLogin (req, res, next){
     if (!(clientToken != null && clientToken != undefined)) {
         await placeLoginRedirectCookie(req, res);
         res.redirect("login/");
-        next();
+        return next();
     }
     // check if the token is valid
     
@@ -35,10 +35,10 @@ async function checkLogin (req, res, next){
     if(!findResult){
         await placeLoginRedirectCookie(req, res);
         res.redirect("login/");
-        next();
+        return next();
     }
     
-    next();
+    return next();
 }
 router.use(checkLogin);
 
