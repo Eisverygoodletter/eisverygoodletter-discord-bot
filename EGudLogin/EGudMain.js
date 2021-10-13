@@ -26,16 +26,16 @@ async function checkLogin (req, res, next){
     // check if client has a token
     if (!(clientToken != null && clientToken != undefined)) {
         await placeLoginRedirectCookie(req, res);
-        res.redirect("login");
-        return next();
+        res.redirect("game/login");
+        return;
     }
     // check if the token is valid
     
     const findResult = await findAccountWithToken(clientToken);
     if(!findResult){
         await placeLoginRedirectCookie(req, res);
-        res.redirect("login");
-        return next();
+        res.redirect("game/login");
+        return;
     }
     
     return next();
