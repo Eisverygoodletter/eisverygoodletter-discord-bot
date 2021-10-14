@@ -17,4 +17,9 @@ async function sendLoginJS(req, res){
 }
 router.get("/loginClient.js", sendLoginJS);
 
+async function sendGetPostJS(req, res){
+    res.sendFile("client/getPost.js", {root: __dirname});
+}
+router.get("/getPost.js", sendGetPostJS);
+
 module.exports = router;

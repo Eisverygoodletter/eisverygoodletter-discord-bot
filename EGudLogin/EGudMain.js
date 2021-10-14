@@ -18,7 +18,7 @@ async function placeLoginRedirectCookie(req, res){
 async function checkLogin (req, res, next){
     console.log("url: ");
     console.log(req.url);
-    if(req.url == "/login" || req.url == "/login/createAccount" || req.url.endsWith(".js") || req.url.endsWith(".css")){
+    if(req.url.contains("/login") || req.url.endsWith(".js") || req.url.endsWith(".css")){
         return next();
     }
     const clientToken = req.cookies[process.env.EGUD_TOKEN_COOKIE_NAME];
