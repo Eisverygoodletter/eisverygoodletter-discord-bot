@@ -3,17 +3,23 @@
     <head>
         <link rel="stylesheet" href="login/loginClient.css">
         <title>Login</title>
+        <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.js"></script>
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+            integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+            crossorigin="anonymous">
+        </script>
     </head>
     <body>
         <div class="container">
             <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" required>
+            <input id="username" type="text" placeholder="Enter Username" name="username" required>
         
             <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
+            <input id="password" type="password" placeholder="Enter Password" name="password" required>
         
-            <button type="submit">Login</button>
-            <button type="submit" id="accountCreate">Help I don't have an account</button>
+            <button id="accountLogin">Login</button>
+            <button id="accountCreate">Help I don't have an account</button>
             
         </div>
         <p>
