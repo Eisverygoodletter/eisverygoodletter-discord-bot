@@ -19,7 +19,7 @@ async function checkLogin (req, res, next){
     console.log("url: ");
     console.log(req.url);
     const url = req.url;
-    if(url.contains("/login") || req.url.endsWith(".js") || req.url.endsWith(".css")){
+    if(url.includes("/login") || req.url.endsWith(".js") || req.url.endsWith(".css")){
         return next();
     }
     const clientToken = req.cookies[process.env.EGUD_TOKEN_COOKIE_NAME];
