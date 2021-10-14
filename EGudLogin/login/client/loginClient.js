@@ -1,4 +1,5 @@
 baseURL = "https://eisverygoodletter-discord-bot.herokuapp.com/game/API"
+
 var accountCreationButton = document.getElementById("accountCreate");
 accountCreationButton.onclick = function(){
     console.log("going to account creation page");

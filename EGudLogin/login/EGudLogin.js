@@ -22,4 +22,6 @@ async function sendGetPostJS(req, res){
 }
 router.get("/getPost.js", sendGetPostJS);
 
+router.use("/API", require("./EGudLoginAPI.js"));
+
 module.exports = router;
