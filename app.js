@@ -120,3 +120,6 @@ function loadCommands(){
 }
 loadCommands();
 
+app.get("/", async (req, res)=>{
+  res.send("Welcome to the root directory! there's nothing here :)")
+});
