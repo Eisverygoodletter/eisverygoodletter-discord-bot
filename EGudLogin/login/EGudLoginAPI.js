@@ -5,7 +5,8 @@ router.post("login-with-username", async (req, res)=>{
         const username = req.body.username;
         const password = req.body.password;
         // hash the password
-        const hashedPassword = bcrypt.hash(password, process.env.HASHINGSALT)
+        const hashedPassword = bcrypt.hash(password, process.env.HASHINGSALT);
+        
     }
     catch(error){
         console.log(error);
