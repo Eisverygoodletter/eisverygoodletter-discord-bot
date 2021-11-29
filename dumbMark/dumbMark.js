@@ -38,7 +38,7 @@ module.exports = function(app, client){
         commandName: "E_dumark",
         details:{
             callFunc: markUser,
-            requiredPerms: ["Admin"],
+            requiredPerms: [],
             requireAllPermsListed: true,
             paramType: "infi-size",
             splittingUnit: ", ",
@@ -48,7 +48,7 @@ module.exports = function(app, client){
         commandName: "E_undumark",
         details:{
             callFunc: unMarkUser,
-            requiredPerms: ["Admin"],
+            requiredPerms: [],
             requireAllPermsListed: true,
             paramType: "infi-size",
             splittingUnit: ", ",
