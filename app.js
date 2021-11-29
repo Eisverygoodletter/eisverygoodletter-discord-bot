@@ -117,6 +117,7 @@ function loadCommands(){
   commandList = commandList.concat(require("./intercon/intercon-allows.js")());
   app.use("/chess", require("./chess/serverSide/chess.js"));
   app.use("/game", require("./EGudLogin/EGudMain.js"));
+  commandList = commandList.concat(require("./dumbMark/dumbMark.js")());
 }
 loadCommands();
 

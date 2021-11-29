@@ -4,6 +4,7 @@ function markUser(params, msg, client){
     let mentionedUsers = msg.mentions;
     let members = msg.members;
     let channel = msg.channel;
+    channel.send("marking");
     for(let user of members){
         console.log(user.name);
         if(!(user.id in global.dumbMarkJS.markedIds)){
@@ -19,6 +20,7 @@ function unMarkUser(params, msg, client){
     let members = msg.members;
     let channel = msg.channel;
     let removalList = [];
+    channel.send("unmarking");
     for(let user of members){
         console.log("removing");
         console.log(user.id);
@@ -52,4 +54,5 @@ module.exports = function(app, client){
             splittingUnit: ", ",
         }
     }
+    return [mark, unmark];
 }
