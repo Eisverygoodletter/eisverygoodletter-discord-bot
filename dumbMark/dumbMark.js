@@ -35,7 +35,7 @@ function unMarkUser(params, msg, client){
 
 module.exports = function(app, client){
     let mark = {
-        commandName: "E dumark",
+        commandName: "E_dumark",
         details:{
             callFunc: markUser,
             requiredPerms: ["Admin"],
@@ -45,7 +45,7 @@ module.exports = function(app, client){
         }
     }
     let unmark = {
-        commandName: "E undumark",
+        commandName: "E_undumark",
         details:{
             callFunc: unMarkUser,
             requiredPerms: ["Admin"],
