@@ -5,7 +5,7 @@ function markUser(params, msg, client){
     let members = msg.members;
     let channel = msg.channel;
     channel.send("marking");
-    for(let user of members){
+    for(let user in members){
         console.log(user.name);
         if(!(user.id in global.dumbMarkJS.markedIds)){
             global.dumbMarkJS.markedIds.push(user.id);
