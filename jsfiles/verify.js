@@ -1,6 +1,4 @@
-
-
-const verify = function(msg, myClient){
+const verify = function(msg, myClient) {
     console.log("verifying" + msg.author.username);
     var thisToken = "shittyTemporaryReplacementLink";
     msg.author.send("please go to this link: ");

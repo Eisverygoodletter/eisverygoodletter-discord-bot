@@ -1,5 +1,6 @@
-const charList = ['🇦','🇧','🇨','🇩','🇪','🇫']
-function poll(params, msg, client){
+const charList = ['🇦', '🇧', '🇨', '🇩', '🇪', '🇫']
+
+function poll(params, msg, client) {
     console.log("polling " + params.join());
     // params 0 is the question
     var messageText = "";
@@ -7,7 +8,7 @@ function poll(params, msg, client){
     messageText += question + "\n";
     messageText += "vote!\n";
     var weSentSomething = false;
-    for(let i = 1; i < params.length; i++){
+    for (let i = 1; i < params.length; i++) {
         // starting from index 1, create question for each
         var addIn = ":regional_indicator_" + String.fromCharCode(i + 96) + "::" //97 starts with the actual unicode stuff
         addIn += params[i];
@@ -15,26 +16,25 @@ function poll(params, msg, client){
         messageText += addIn;
         weSentSomething = true;
     }
-    if(weSentSomething){
-        msg.channel.send(messageText).then((newMsg)=>{
+    if (weSentSomething) {
+        msg.channel.send(messageText).then((newMsg) => {
             // add reactions
-            for(let i = 1; i < params.length; i++){
+            for (let i = 1; i < params.length; i++) {
                 console.log(charList[i - 1]);
                 newMsg.react(charList[i - 1]);
             }
         })
-    }
-    else{
+    } else {
         msg.channel.send("bruh wtf you need to put parameters");
     }
 }
 
 
-module.exports = function(){
+module.exports = function() {
     // called on init
     var pollAdd = {
-        commandName:"!poll",
-        details:{
+        commandName: "!poll",
+        details: {
             callFunc: poll,
             requiredPerms: ["verified"],
             requireAllPermsListed: true,
