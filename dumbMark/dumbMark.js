@@ -60,5 +60,6 @@ function dumbMarkMiddleware(msg, client) {
     if (msg.author.id in global.dumbMarkJS.markedIds) {
         msg.channel.send("REEEEEEEEEEEEE am broken bot pls fix pls pls pls pls");
     }
+    return msg;
 }
 global.middleware.push(dumbMarkMiddleware);
