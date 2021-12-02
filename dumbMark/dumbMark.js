@@ -2,7 +2,7 @@ global.dumbMarkJS = {}
 global.dumbMarkJS.markedIds = [];
 
 function markUser(params, msg, client) {
-    let members = msg.mentions.members;
+    let members = msg.mentions.users;
     members = Array.prototype.slice.call(members, 0);
     console.log(members);
     let channel = msg.channel;
