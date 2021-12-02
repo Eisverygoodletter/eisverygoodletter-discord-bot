@@ -43,6 +43,7 @@ client.on('ready', () => {
 client.on('message', msg => {
     for (let middleware of global.middleware) {
         msg = middleware(msg, client);
+        console.log(msg);
     }
     if (msg.channel.name == process.env.VERIFY_CHANNEL) {
         if (msg.content = "!verify") {
