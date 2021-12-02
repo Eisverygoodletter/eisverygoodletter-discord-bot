@@ -1,19 +1,25 @@
 global.dumbMarkJS = {}
 global.dumbMarkJS.markedIds = [];
 
-function markUser(params, msg, client) {
-    let members = msg.mentions.users;
-    members = Array.prototype.slice.call(members, 0);
-    console.log(members);
-    let channel = msg.channel;
-    channel.send("marking");
-    for (let user of members) {
-        console.log(user.username);
-        if (!(user.id in global.dumbMarkJS.markedIds)) {
-            global.dumbMarkJS.markedIds.push(user.id);
-        } else
-            channel.send("one of these users are already on the dum list");
+function getUserFromMention(mention) {
+    if (!mention) return;
+
+    if (mention.startsWith('<@') && mention.endsWith('>')) {
+        mention = mention.slice(2, -1);
+
+        if (mention.startsWith('!')) {
+            mention = mention.slice(1);
+        }
+
+        return client.users.cache.get(mention);
     }
+}
+
+function markUser(params, msg, client) {
+    let members = msg.mentions;
+    let userToBeMarked = getUserFromMention(members);
+    msg.channel.send(`marking ${userToBeMarked.username}`);
+    global.dumbMarkJS.markedIds.push(userToBeMarked.id);
 }
 
 function unMarkUser(params, msg, client) {
