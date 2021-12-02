@@ -3,11 +3,11 @@ global.dumbMarkJS.markedIds = [];
 
 function markUser(params, msg, client) {
     let mentionedUsers = msg.mentions;
-    let members = msg.members;
+    let members = mentionedUsers.users;
     let channel = msg.channel;
     channel.send("marking");
     for (let user in members) {
-        console.log(user.name);
+        console.log(user.username);
         if (!(user.id in global.dumbMarkJS.markedIds)) {
             global.dumbMarkJS.markedIds.push(user.id);
         } else
