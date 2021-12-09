@@ -62,7 +62,7 @@ function unAllow(params, msg, client) {
 
 module.exports = function(app, client) {
     var allowAdd = {
-        commandName: "E intercon-allow",
+        commandName: "^intercon-allow",
         details: {
             callFunc: allow,
             requiredPerms: ["verified"],
@@ -72,7 +72,7 @@ module.exports = function(app, client) {
         }
     }
     var unAllowAdd = {
-        commandName: "E intercon-unallow",
+        commandName: "^intercon-unallow",
         details: {
             callFunc: unAllow,
             requiredPerms: ["Admin"],
